@@ -42,6 +42,14 @@ function LoadLevel(level) {
         player.y = 9 * 16;
         break;
     case 2: //Level 3
+        map.push("BBBBBBBBBBBBBBBBBBBB");
+        map.push("BBBBBBBBBBBBBBBBBBBB");
+        map.push("BBBBBBBBBBBBBBBBBBBB");
+        map.push([9, 0]);
+        player.x = 0 * 16;
+        player.y = 9 * 16;
+        break;
+    case 3: //Level 4
         map.push("----------RRRRRDGGGG");
         map.push("----------U----DGGGG");
         map.push("--------GGU----D----");
@@ -56,7 +64,7 @@ function LoadLevel(level) {
         player.x = 0 * 16;
         player.y = 9 * 16;
         break;
-    case 3: //Level 4
+    case 4: //Level 5
         map.push("GGGGGGGGGGGGGGGGGGGG");
         map.push("GGGGGGGGGGGGGGGGGGGG");
         map.push("GGGGGGGGGGGGGGGGGGGG");
@@ -71,7 +79,7 @@ function LoadLevel(level) {
         player.x = 0 * 16;
         player.y = 9 * 16;
         break;
-    case 4: //Level 5
+    case 5: //Level 6
         map.push("GGGGGGGGGGGGGGGGGGGG");
         map.push("GGGGGGGGGGGGGGGGGGGG");
         map.push("LLLLLLLLLLLLLLLLLLLL");
@@ -86,14 +94,14 @@ function LoadLevel(level) {
         player.x = 0 * 16;
         player.y = 9 * 16;
         break;
-    case 5: //Level 6
+    case 6: //Level 7
         map.push("GGGGGGGGGGGGGGGGGGGG");
         map.push("GGGGGGGGGGGGGGGGGGGG");
+        map.push("GGGGGGGGGGGGGGGGGGGG");
         map.push("LLLLLLLLLLLLLLLLLLLL");
+        map.push("GGGGGGGGGGGGGGGGGGGG");
         map.push("LLLLLLLLLLLLLLLLLLLL");
-        map.push("LLLLLLLLLLLLLLLLLLLL");
-        map.push("LLLLLLLLLLLLLLLLLLLL");
-        map.push("LLLLLLLLLLLLLLLLLLLL");
+        map.push("GGGGGGGGGGGGGGGGGGGG");
         map.push("LLLLLLLLLLLLLLLLLLLL");
         map.push("GGGGGGGGGGGGGGGGGGGG");
         map.push("GGGGGGGGGGGGGGGGGGGG");
