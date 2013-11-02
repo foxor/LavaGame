@@ -5,37 +5,29 @@ var health = 5;
 var stgWidth = 320;
 var stgHeight = 320;
 var map = [];
+var curLevel = 0;
 
 function LoadLevel(level) {
     map = [];
     switch (level) {
     case 0:
-        map.push([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
-        map.push([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
-        map.push([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
-        map.push([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
-        map.push([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
-        map.push([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
-        map.push([0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
-        map.push([0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
-        map.push([0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
-        map.push([0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0]);
-        map.push([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0]);
+        map.push([0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
         map.push([0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0]);
-        map.push([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
-        map.push([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
-        map.push([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
-        map.push([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
-        map.push([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
-        map.push([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
-        map.push([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
-        map.push([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
+        map.push([0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0]);
+        map.push([0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0]);
+        map.push([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0]);
+        map.push([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0]);
+        map.push([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0]);
+        map.push([0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0]);
+        map.push([0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0]);
+        map.push([0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0]);
+        map.push([8, 0]);
         player.x = 7 * 16;
-        player.y = 11 * 16;
+        player.y = 7 * 16;
         break;
     }
     for (var i = 0; i < 20; i++) {
-        for (var j = 0; j < 20; j++) {
+        for (var j = 0; j < 10; j++) {
             bg = new Sprite(16, 16);
             var tile = map[i][j];
             switch (tile) {
@@ -52,6 +44,13 @@ function LoadLevel(level) {
             bg.y = i * 16;
         }
     }
+    bg = new Sprite(16, 16);
+    bg.image = game.assets['icon0.png'];
+    bg.frame = 10;
+    bg.x = map[10][0] * 16;
+    bg.y = map[10][1] * 16;
+    game.rootScene.addChild(bg);
+
 }
 
 //02 Player Class
@@ -81,6 +80,20 @@ Player = Class.create(Sprite, {
             map[minY][maxX] == 0 || 
             map[maxY][minX] == 0 || 
             map[maxY][maxX] == 0)
+        {
+            return true;
+        }
+        return false;
+    },
+
+    checkLevelComplete: function() {
+        var minX = Math.floor(this.x / 16);
+        var minY = Math.floor(this.y / 16);
+        var maxX = Math.ceil(this.x / 16);
+        var maxY = Math.ceil(this.y / 16);
+        var winX = map[20][0];
+        var winY = map[20][1];
+        if (minX <= winX && maxX >= winX && minY <= winY && maxY >= winY)
         {
             return true;
         }
@@ -118,6 +131,10 @@ Player = Class.create(Sprite, {
             console.log("Hmmm");
             //gameOver();
         }
+        if (this.checkLevelComplete()) {
+            console.log("winna");
+            // LoadLevel(++curLevel);
+        }
     }
 });
 
@@ -130,7 +147,7 @@ window.onload = function() {
 
     game.onload = function() { //Prepares the game
         player = new Player();
-        LoadLevel(0);
+        LoadLevel(curLevel);
         game.rootScene.addChild(player);
         //05 Add Gem
         
