@@ -90,7 +90,6 @@ function LoadLevel(level) {
     for (var i = 0; i < 10; i++) {
         for (var j = 0; j < 20; j++) {
             bg = new Sprite(16, 16);
-            console.log(map[i] + " " + map[i].length);
             var tile = map[i][j];
             switch (tile) {
                 case '-':
@@ -122,6 +121,8 @@ function LoadLevel(level) {
     game.rootScene.addChild(bg);
     bg.x = map[10][0] * 16;
     bg.y = map[10][1] * 16;
+    game.rootScene.removeChild(player);
+    game.rootScene.addChild(player);
 }
 
 //02 Player Class
