@@ -25,12 +25,24 @@ Player = Class.create(Sprite, {
         //04 Mouse Variables
     },
 
+    checkLava: function() {
+        var minX = Math.floor(this.x / 16);
+        var minY = Math.floor(this.y / 16);
+        var maxX = Math.ceil(this.x / 16);
+        var maxY = Math.ceil(this.y / 16);
+        if (map[minY][minX] == 0 ||
+            map[minY][maxX] == 0 || 
+            map[maxY][minX] == 0 || 
+            map[maxY][maxX] == 0)
+        {
+            return true;
+        }
+        return false;
+    },
+
     onenterframe: function() {
         
         //03 Player Controls
-        console.log(map[0][0]);
-        this.lastDirection[0] = 0;
-        this.lastDirection[1] = 0;
         if(game.input.left && !game.input.right && !game.input.up && !game.input.down){
             this.lastDirection[0] = -moveSpeed;
             this.lastDirection[1] = 0;
@@ -51,66 +63,16 @@ Player = Class.create(Sprite, {
             this.lastDirection[0] = 0;
             this.lastDirection[1] = 0;
         }
-        if (map[Math.floor(this.y / 16) - 1][Math.floor((this.x + this.lastDirection[0]) / 16)] != 0)
-            this.x += this.lastDirection[0];
-        if (map[Math.floor((this.y + this.lastDirection[1]) / 16)][Math.floor(this.x / 16)] != 0)
-            this.y += this.lastDirection[1];
         
-        //04 Mouse Update
+        this.x += this.lastDirection[0];
+        this.y += this.lastDirection[1];
+        
+        if (this.checkLava()) {
+            console.log("Hmmm");
+            //gameOver();
+        }
     }
 });
-
-//05 Gem Class
-// Gem = Class.create(Sprite, {
-//     initialize: function() {
-//         Sprite.call(this, 16, 16);
-//         this.image = game.assets['diamond-sheet.png'];
-//     },
-
-//     onenterframe: function() {
-
-//         //Rotating using scaleX
-        
-//         //07 Collision Check
-//     }
-// });
-
-// //08 Bomb Class
-// Bomb = Class.create(Sprite, {
-//     initialize: function() {
-//         Sprite.call(this, 16, 16);
-//         this.image = game.assets['icon0.png'];
-//         this.x = Math.random() * (stgWidth - 16);
-//         this.y = Math.random() * (stgHeight - 16); //Account for the bottom part
-//         if (this.y < 50) {
-//             this.y = 50;
-//         }
-
-//         this.frame = 24;
-//     },
-
-//     onenterframe: function() {
-//         if (this.age === 60) {
-//             game.rootScene.removeChild(this);
-//         }
-
-//         if (this.intersect(player)) {
-//             player.health--;
-//             game.rootScene.removeChild(this);
-//             console.log("ouch!");
-//         }
-
-//         if (this.age % 10 === 0) {
-//             if (this.frame === 25) {
-//                 this.frame = 24;
-//             } else {
-//                 this.frame++;
-//             }
-//         }
-//     }
-
-// });
-
 
 //Begin game code
 window.onload = function() {
