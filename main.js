@@ -151,7 +151,7 @@ Player = Class.create(Sprite, {
         }
         if (this.checkLevelComplete()) {
             console.log("winna");
-            // LoadLevel(++curLevel);
+            LoadLevel(++curLevel);
         }
     }
 });
