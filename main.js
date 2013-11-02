@@ -27,7 +27,7 @@ function LoadLevel(level) {
         break;
     }
     for (var i = 0; i < 20; i++) {
-        for (var j = 0; j < 20; j++) {
+        for (var j = 0; j < 10; j++) {
             bg = new Sprite(16, 16);
             var tile = map[i][j];
             switch (tile) {
