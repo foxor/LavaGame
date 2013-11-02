@@ -3,7 +3,7 @@ enchant(); //the magic words that start enchant.js
 var moveSpeed = 4;
 var health = 5;
 var stgWidth = 320;
-var stgHeight = 320;
+var stgHeight = 160;
 var map = [];
 var curLevel = 0;
 
@@ -26,8 +26,8 @@ function LoadLevel(level) {
         player.y = 7 * 16;
         break;
     }
-    for (var i = 0; i < 20; i++) {
-        for (var j = 0; j < 10; j++) {
+    for (var i = 0; i < 10; i++) {
+        for (var j = 0; j < 20; j++) {
             bg = new Sprite(16, 16);
             var tile = map[i][j];
             switch (tile) {
@@ -91,8 +91,8 @@ Player = Class.create(Sprite, {
         var minY = Math.floor(this.y / 16);
         var maxX = Math.ceil(this.x / 16);
         var maxY = Math.ceil(this.y / 16);
-        var winX = map[20][0];
-        var winY = map[20][1];
+        var winX = map[10][0];
+        var winY = map[10][1];
         if (minX <= winX && maxX >= winX && minY <= winY && maxY >= winY)
         {
             return true;
