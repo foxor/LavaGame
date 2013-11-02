@@ -67,7 +67,6 @@ function LoadLevel(level) {
     game.rootScene.addChild(bg);
     bg.x = map[10][0] * 16;
     bg.y = map[10][1] * 16;
-    console.log(bg.x + " " + bg.y);
 }
 
 //02 Player Class
@@ -121,12 +120,12 @@ Player = Class.create(Sprite, {
         
         //03 Player Controls
         if(game.input.left && !game.input.right && !game.input.up && !game.input.down){
-            this.frame = 0;
+            this.frame = 1;
             this.lastDirection[0] = -moveSpeed;
             this.lastDirection[1] = 0;
         }
         else if(game.input.right && !game.input.left && !game.input.up && !game.input.down){
-            this.frame = 1;
+            this.frame = 0;
             this.lastDirection[0] = moveSpeed;
             this.lastDirection[1] = 0;
         }
