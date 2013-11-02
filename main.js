@@ -8,15 +8,16 @@ var map = [];
 var curLevel = 0;
 
 function LoadLevel(level) {
+    console.log(level);
     map = [];
     switch (level) {
-    case 0:
+    case 0: //Level 1
         map.push("-------GGGG---------");
         map.push("-------GGGGG--------");
-        map.push("--------GGGGG-------");
-        map.push("---------GGGGG------");
-        map.push("----------GGGGG-----");
-        map.push("------------GGG-----");
+        map.push("DRRR----GGGGG-------");
+        map.push("D--U-----GGGGG------");
+        map.push("D--U------GGGGG-----");
+        map.push("DLLL--------GGG-----");
         map.push("------------GGG-----");
         map.push("-------GGGGGGGG-----");
         map.push("-------GGGGGGG------");
@@ -25,18 +26,93 @@ function LoadLevel(level) {
         player.x = 7 * 16;
         player.y = 7 * 16;
         break;
-    case 1:
+    case 1: //Level 2
         map.push("GGGGGGGGGGGGGG------");
         map.push("GGGGGGGGGGGGGG------");
         map.push("------BB----GG------");
-        map.push("------BB----GG------");
-        map.push("----BBBB----GG------");
+        map.push("------BB----BB------");
+        map.push("----BBBB----BB------");
         map.push("----BBBB----GG------");
         map.push("BBBBBB----GGGG------");
         map.push("BBBBBB----GGGG------");
         map.push("GGGGGGGGGGGG--------");
         map.push("GGGGGGGGGGGG--------");
-        map.push([0, 9]);
+        map.push([0, 0]);
+        player.x = 0 * 16;
+        player.y = 9 * 16;
+        break;
+    case 2: //Level 3
+        map.push("BBBBBBBBBBBBBBBBBBBB");
+        map.push("BBBBBBBBBBBBBBBBBBBB");
+        map.push("BBBBBBBBBBBBBBBBBBBB");
+        map.push("BBBBBBBBBBBBBBBBBBBB");
+        map.push("BBBBBBBBBBBBBBBBBBBB");
+        map.push("BBBBBBBBBBBBBBBBBBBB");
+        map.push("BBBBBBBBBBBBBBBBBBBB");
+        map.push("BBBBBBBBBBBBBBBBBBBB");
+        map.push("BBBBBBBBBBBBBBBBBBBB");
+        map.push("BBBBBBBBBBBBBBBBBBBB");
+        map.push([9, 0]);
+        player.x = 0 * 16;
+        player.y = 9 * 16;
+        break;
+    case 3: //Level 4
+        map.push("----------RRRRRDGGGG");
+        map.push("----------U----DGGGG");
+        map.push("--------GGU----D----");
+        map.push("--RRRRRDGGULLLLL----");
+        map.push("--U----D------------");
+        map.push("--U----D------------");
+        map.push("--U----D------------");
+        map.push("--ULLLLL------------");
+        map.push("GGGG----------------");
+        map.push("GGGG----------------");
+        map.push([9, 0]);
+        player.x = 0 * 16;
+        player.y = 9 * 16;
+        break;
+    case 4: //Level 5
+        map.push("GGGGGGGGGGGGGGGGGGGG");
+        map.push("GGGGGGGGGGGGGGGGGGGG");
+        map.push("GGGGGGGGGGGGGGGGGGGG");
+        map.push("--------GGGG--------");
+        map.push("--------------------");
+        map.push("--------GGGG--------");
+        map.push("GGGGGGGGGGGGGGGGGGGG");
+        map.push("GGGGGGGGGGGGGGGGGGGG");
+        map.push("GGGGGGGGGGGGGGGGGGGG");
+        map.push("GGGGGGGGGGGGGGGGGGGG");
+        map.push([9, 0]);
+        player.x = 0 * 16;
+        player.y = 9 * 16;
+        break;
+    case 5: //Level 6  Needs moving platforms on every line of lava.
+        map.push("GGGGGGGGGGGGGGGGGGGG");
+        map.push("GGGGGGGGGGGGGGGGGGGG");
+        map.push("LLLLLLLLLLLLLLLLLLLL");
+        map.push("RRRRRRRRRRRRRRRRRRRR");
+        map.push("LLLLLLLLLLLLLLLLLLLL");
+        map.push("RRRRRRRRRRRRRRRRRRRR");
+        map.push("LLLLLLLLLLLLLLLLLLLL");
+        map.push("RRRRRRRRRRRRRRRRRRRR");
+        map.push("GGGGGGGGGGGGGGGGGGGG");
+        map.push("GGGGGGGGGGGGGGGGGGGG");
+        map.push([9, 0]);
+        player.x = 0 * 16;
+        player.y = 9 * 16;
+        break;
+    case 6: //Level 7 Needs water buckets / refills every other line of ground.
+        map.push("GGGGGGGGGGGGGGGGGGGG");
+        map.push("GGGGGGGGGGGGGGGGGGGG");
+        map.push("GGGGGGGGGGGGGGGGGGGG");
+        map.push("LLLLLLLLLLLLLLLLLLLL");
+        map.push("GGGGGGGGGGGGGGGGGGGG");
+        map.push("LLLLLLLLLLLLLLLLLLLL");
+        map.push("GGGGGGGGGGGGGGGGGGGG");
+        map.push("LLLLLLLLLLLLLLLLLLLL");
+        map.push("GGGGGGGGGGGGGGGGGGGG");
+        map.push("GGGGGGGGGGGGGGGGGGGG");
+        map.push([9, 0]);
         player.x = 0 * 16;
         player.y = 9 * 16;
         break;
@@ -58,6 +134,18 @@ function LoadLevel(level) {
                 case 'U':
                     bg.image = game.assets['FlowingLava.png'];
                     break;
+                case 'D':
+                    bg.image = game.assets['FlowingLava.png'];
+                    bg.rotation = 180;
+                    break;
+                case 'L':
+                    bg.image = game.assets['FlowingLava.png'];
+                    bg.rotation = 270;
+                    break;
+                case 'R':
+                    bg.image = game.assets['FlowingLava.png'];
+                    bg.rotation = 90;
+                    break;
             }
             bg.frame = tile;
             game.rootScene.addChild(bg);
@@ -71,6 +159,8 @@ function LoadLevel(level) {
     game.rootScene.addChild(bg);
     bg.x = map[10][0] * 16;
     bg.y = map[10][1] * 16;
+    game.rootScene.removeChild(player);
+    game.rootScene.addChild(player);
 }
 
 //02 Player Class
@@ -96,10 +186,10 @@ Player = Class.create(Sprite, {
         var minY = Math.floor((this.y + 5) / 16);
         var maxX = Math.floor((this.x + 7) / 16);
         var maxY = Math.floor((this.y + 12) / 16);
-        if (map[minY][minX] == 0 ||
-            map[minY][maxX] == 0 || 
-            map[maxY][minX] == 0 || 
-            map[maxY][maxX] == 0)
+        if (map[minY][minX] == '-' ||
+            map[minY][maxX] == '-' || 
+            map[maxY][minX] == '-' || 
+            map[maxY][maxX] == '-')
         {
             return true;
         }
@@ -151,11 +241,12 @@ Player = Class.create(Sprite, {
         
         if (this.checkLava()) {
             console.log("Hmmm");
+            LoadLevel(curLevel);
             //gameOver();
         }
         if (this.checkLevelComplete()) {
-            console.log("winna");
             LoadLevel(++curLevel);
+
         }
     }
 });
