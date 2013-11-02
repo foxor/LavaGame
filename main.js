@@ -52,7 +52,7 @@ function LoadLevel(level) {
         map.push("BBBBBBBBBBBBBBBBBBBB");
         map.push("BBBBBBBBBBBBBBBBBBBB");
         map.push("BBBBBBBBBBBBBBBBBBBB");
-        map.push([9, 0]);
+        map.push([19, 0]);
         player.x = 0 * 16;
         player.y = 9 * 16;
         break;
@@ -67,7 +67,7 @@ function LoadLevel(level) {
         map.push("--ULLLLL------------");
         map.push("GGGG----------------");
         map.push("GGGG----------------");
-        map.push([9, 0]);
+        map.push([19, 0]);
         player.x = 0 * 16;
         player.y = 9 * 16;
         break;
@@ -82,7 +82,7 @@ function LoadLevel(level) {
         map.push("GGGGGGGGGGGGGGGGGGGG");
         map.push("GGGGGGGGGGGGGGGGGGGG");
         map.push("GGGGGGGGGGGGGGGGGGGG");
-        map.push([9, 0]);
+        map.push([19, 0]);
         player.x = 0 * 16;
         player.y = 9 * 16;
         break;
@@ -97,7 +97,7 @@ function LoadLevel(level) {
         map.push("RRRRRRRRRRRRRRRRRRRR");
         map.push("GGGGGGGGGGGGGGGGGGGG");
         map.push("GGGGGGGGGGGGGGGGGGGG");
-        map.push([9, 0]);
+        map.push([19, 0]);
         player.x = 0 * 16;
         player.y = 9 * 16;
         break;
@@ -112,14 +112,25 @@ function LoadLevel(level) {
         map.push("LLLLLLLLLLLLLLLLLLLL");
         map.push("GGGGGGGGGGGGGGGGGGGG");
         map.push("GGGGGGGGGGGGGGGGGGGG");
-        map.push([9, 0]);
+        map.push([19, 0]);
         player.x = 0 * 16;
         player.y = 9 * 16;
         break;
     case 7: //Level 8 
-        map.push("--------------------");
-        map.push("--------------------");
-        map.push("--------------------");
+        map.push("------UUUDDD--UGGUGG");
+        map.push("------UUUDDD--UGGUGG");
+        map.push("------UUUDDD--UGGUGG");
+        map.push("------UUUDDD--UGGUGG");
+        map.push("------UUUDDD--UGGUGG");
+        map.push("------UUUDDDGGUGGUGG");
+        map.push("------UUUDDD--UGGUGG");
+        map.push("GGGGGGUUUDDD--UGGUGG");
+        map.push("GGGGGGUUUDDD--UGGUGG");
+        map.push("GGGGGGUUUDDDGGUGGUGG");
+        map.push([19,0]);
+        player.x = 0*16;
+        player.y = 9*16;
+        break;
     }
     for (var i = 0; i < 10; i++) {
         for (var j = 0; j < 20; j++) {
