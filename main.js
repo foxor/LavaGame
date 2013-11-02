@@ -23,6 +23,7 @@ function LoadLevel(level) {
         map.push("-------GGGGGGG------");
         map.push("-------GGGGGG-------");
         map.push([8, 0]);
+        map.push([[4, 0]]);
         player.x = 7 * 16;
         player.y = 7 * 16;
         break;
@@ -38,6 +39,7 @@ function LoadLevel(level) {
         map.push("GGGGGGGGGGGG--------");
         map.push("GGGGGGGGGGGG--------");
         map.push([0, 0]);
+        map.push([]);
         player.x = 0 * 16;
         player.y = 9 * 16;
         break;
@@ -53,6 +55,7 @@ function LoadLevel(level) {
         map.push("BBBBBBBBBBBBBBBBBBBB");
         map.push("BBBBBBBBBBBBBBBBBBBB");
         map.push([9, 0]);
+        map.push([]);
         player.x = 0 * 16;
         player.y = 9 * 16;
         break;
@@ -68,6 +71,7 @@ function LoadLevel(level) {
         map.push("GGGG----------------");
         map.push("GGGG----------------");
         map.push([9, 0]);
+        map.push([]);
         player.x = 0 * 16;
         player.y = 9 * 16;
         break;
@@ -83,6 +87,7 @@ function LoadLevel(level) {
         map.push("GGGGGGGGGGGGGGGGGGGG");
         map.push("GGGGGGGGGGGGGGGGGGGG");
         map.push([9, 0]);
+        map.push([]);
         player.x = 0 * 16;
         player.y = 9 * 16;
         break;
@@ -98,6 +103,7 @@ function LoadLevel(level) {
         map.push("GGGGGGGGGGGGGGGGGGGG");
         map.push("GGGGGGGGGGGGGGGGGGGG");
         map.push([9, 0]);
+        map.push([]);
         player.x = 0 * 16;
         player.y = 9 * 16;
         break;
@@ -113,6 +119,7 @@ function LoadLevel(level) {
         map.push("GGGGGGGGGGGGGGGGGGGG");
         map.push("GGGGGGGGGGGGGGGGGGGG");
         map.push([9, 0]);
+        map.push([]);
         player.x = 0 * 16;
         player.y = 9 * 16;
         break;
@@ -157,12 +164,24 @@ function LoadLevel(level) {
             bg.y = i * 16;
         }
     }
+
+    //Goal
     bg = new Sprite(16, 16);
     bg.image = game.assets['icon0.png'];
     bg.frame = 10;
     game.rootScene.addChild(bg);
     bg.x = map[10][0] * 16;
     bg.y = map[10][1] * 16;
+
+    //Moving Platforms
+    for (var i = 0; i < map[11].length; i++) {
+        bg = new Sprite(16, 16);
+        bg.image = game.assets['MovingBlock.png'];
+        game.rootScene.addChild(bg);
+        bg.x = map[11][0] * 16;
+        bg.y = map[11][1] * 16;
+    }
+
     game.rootScene.removeChild(player);
     game.rootScene.addChild(player);
 }
@@ -268,7 +287,8 @@ window.onload = function() {
         'Walkable.png',
         'icon0.png',
         'Breaking.png',
-        'FlowingLava.png'
+        'FlowingLava.png',
+        'MovingBlock.png'
     );
 
     game.onload = function() { //Prepares the game
