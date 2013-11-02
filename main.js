@@ -117,7 +117,7 @@ window.onload = function() {
     game = new Game(stgWidth, stgHeight);
     //Preload images
     //Any resources not preloaded will not appear
-    game.preload('icon0.png', 'diamond-sheet.png', 'bg.png', 'Lavasmall.png');
+    game.preload('icon0.png', 'diamond-sheet.png', 'bg.png', 'Lavasmall.png', 'Walkable.png');
 
     game.onload = function() { //Prepares the game
         //01 Add Background
@@ -145,8 +145,15 @@ window.onload = function() {
         for (var i = 0; i < 20; i++) {
             for (var j = 0; j < 20; j++) {
                 bg = new Sprite(16, 16);
-                bg.image = game.assets['Lavasmall.png'];
                 var tile = map[i][j];
+                switch (tile) {
+                    case 0:
+                        bg.image = game.assets['Lavasmall.png'];
+                        break;
+                    case 1:
+                        bg.image = game.assets['Walkable.png'];
+                        break;
+                }
                 bg.frame = tile;
                 game.rootScene.addChild(bg);
                 bg.x = j * 16;
