@@ -14,10 +14,10 @@ function LoadLevel(level) {
     case 0: //Level 1
         map.push("-------GGGG---------");
         map.push("-------GGGGG--------");
-        map.push("DRRR----GGGGG-------");
-        map.push("D--U-----GGGGG------");
-        map.push("D--U------GGGGG-----");
-        map.push("DLLL--------GGG-----");
+        map.push("--------GGGGG-------");
+        map.push("---------GGGGG------");
+        map.push("----------GGGGG-----");
+        map.push("------------GGG-----");
         map.push("------------GGG-----");
         map.push("-------GGGGGGGG-----");
         map.push("-------GGGGGGG------");
