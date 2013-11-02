@@ -86,7 +86,7 @@ function LoadLevel(level) {
         player.x = 0 * 16;
         player.y = 9 * 16;
         break;
-    case 5: //Level 6
+    case 5: //Level 6  Needs moving platforms on every line of lava.
         map.push("GGGGGGGGGGGGGGGGGGGG");
         map.push("GGGGGGGGGGGGGGGGGGGG");
         map.push("LLLLLLLLLLLLLLLLLLLL");
@@ -101,7 +101,7 @@ function LoadLevel(level) {
         player.x = 0 * 16;
         player.y = 9 * 16;
         break;
-    case 6: //Level 7
+    case 6: //Level 7 Needs water buckets / refills every other line of ground.
         map.push("GGGGGGGGGGGGGGGGGGGG");
         map.push("GGGGGGGGGGGGGGGGGGGG");
         map.push("GGGGGGGGGGGGGGGGGGGG");
