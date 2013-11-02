@@ -102,7 +102,13 @@ Player = Class.create(Sprite, {
         var minY = Math.floor(this.y / 16);
         var maxX = Math.ceil(this.x / 16);
         var maxY = Math.ceil(this.y / 16);
-
+        var winX = map[20][0];
+        var winY = map[20][1];
+        if (minX <= winX && maxX >= winX && minY <= winY && maxY >= winY)
+        {
+            return true;
+        }
+        return false;
     },
 
     onenterframe: function() {
@@ -136,6 +142,10 @@ Player = Class.create(Sprite, {
             console.log("Hmmm");
             //gameOver();
         }
+        if (this.checkLevelComplete()) {
+            console.log("winna");
+            // LoadLevel(++curLevel);
+        }
     }
 });
 
@@ -148,7 +158,7 @@ window.onload = function() {
 
     game.onload = function() { //Prepares the game
         player = new Player();
-        LoadLevel(0);
+        LoadLevel(curLevel);
         game.rootScene.addChild(player);
         //05 Add Gem
         
