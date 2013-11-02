@@ -1,6 +1,6 @@
 enchant(); //the magic words that start enchant.js
 //Stage Variables
-var moveSpeed = 4;
+var moveSpeed = 2;
 var health = 5;
 var stgWidth = 320;
 var stgHeight = 320;
@@ -57,8 +57,8 @@ function LoadLevel(level) {
 //02 Player Class
 Player = Class.create(Sprite, {
     initialize: function() {
-        Sprite.call(this, 16, 16);
-        this.image = game.assets['icon0.png'];
+        Sprite.call(this, 12, 12);
+        this.image = game.assets['Character.png'];
         this.x = stgWidth/2;
         this.y = stgHeight/2;
         this.frame = 44;
@@ -74,9 +74,9 @@ Player = Class.create(Sprite, {
 
     checkLava: function() {
         var minX = Math.floor(this.x / 16);
-        var minY = Math.floor(this.y / 16);
-        var maxX = Math.ceil(this.x / 16);
-        var maxY = Math.ceil(this.y / 16);
+        var minY = Math.floor((this.y + 5) / 16);
+        var maxX = Math.floor((this.x + 7) / 16);
+        var maxY = Math.floor((this.y + 12) / 16);
         if (map[minY][minX] == 0 ||
             map[minY][maxX] == 0 || 
             map[maxY][minX] == 0 || 
@@ -126,7 +126,7 @@ window.onload = function() {
     game = new Game(stgWidth, stgHeight);
     //Preload images
     //Any resources not preloaded will not appear
-    game.preload('icon0.png', 'diamond-sheet.png', 'bg.png', 'Lavasmall.png', 'Walkable.png');
+    game.preload('Character.png', 'diamond-sheet.png', 'bg.png', 'Lavasmall.png', 'Walkable.png');
 
     game.onload = function() { //Prepares the game
         player = new Player();
