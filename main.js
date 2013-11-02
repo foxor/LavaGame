@@ -47,9 +47,8 @@ function LoadLevel(level) {
     bg = new Sprite(16, 16);
     bg.image = game.assets['icon0.png'];
     bg.frame = 10;
-    console.log(map[20][0] + " " + map[20][1]);
-    bg.x = map[20][0] * 16;
-    bg.y = map[20][1] * 16;
+    bg.x = map[10][0] * 16;
+    bg.y = map[10][1] * 16;
     game.rootScene.addChild(bg);
 
 }
