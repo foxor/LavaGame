@@ -70,6 +70,21 @@ function LoadLevel(level) {
         player.x = 0 * 16;
         player.y = 9 * 16;
         break;
+    case 4: //Level 5
+        map.push("GGGGGGGGGGGGGGGGGGGG");
+        map.push("GGGGGGGGGGGGGGGGGGGG");
+        map.push("LLLLLLLLLLLLLLLLLLLL");
+        map.push("RRRRRRRRRRRRRRRRRRRR");
+        map.push("LLLLLLLLLLLLLLLLLLLL");
+        map.push("RRRRRRRRRRRRRRRRRRRR");
+        map.push("LLLLLLLLLLLLLLLLLLLL");
+        map.push("RRRRRRRRRRRRRRRRRRRR");
+        map.push("GGGGGGGGGGGGGGGGGGGG");
+        map.push("GGGGGGGGGGGGGGGGGGGG");
+        map.push([9, 0]);
+        player.x = 0 * 16;
+        player.y = 9 * 16;
+        break;
     }
     for (var i = 0; i < 10; i++) {
         for (var j = 0; j < 20; j++) {
