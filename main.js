@@ -52,7 +52,7 @@ function LoadLevel(level) {
         map.push("BBBBBBBBBBBBBBBBBBBB");
         map.push("BBBBBBBBBBBBBBBBBBBB");
         map.push("BBBBBBBBBBBBBBBBBBBB");
-        map.push([0, 0]);
+        map.push([9, 0]);
         player.x = 0 * 16;
         player.y = 9 * 16;
         break;
