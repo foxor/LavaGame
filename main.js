@@ -26,16 +26,16 @@ Player = Class.create(Sprite, {
     onenterframe: function() {
         
         //03 Player Controls
-        if(game.input.left && !game.input.right){
+        if(game.input.left && !game.input.right && !game.input.up && !game.input.down){
             this.x -= moveSpeed;
         }
-        else if(game.input.right && !game.input.left){
+        else if(game.input.right && !game.input.left && !game.input.up && !game.input.down){
             this.x += moveSpeed;
         }
-        if(game.input.up && !game.input.down){
+        if(game.input.up && !game.input.down && !game.input.left && !game.input.right){
             this.y -= moveSpeed;
         }
-        else if(game.input.down && !game.input.up){
+        else if(game.input.down && !game.input.up && !game.input.left && !game.input.right){
             this.y += moveSpeed;
         }
         
