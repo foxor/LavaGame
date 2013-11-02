@@ -15,6 +15,7 @@ Player = Class.create(Sprite, {
         this.y = stgHeight/2;
         this.frame = 44;
         this.health = 4;
+        this.lastDirection = [0,0];
         //03 Bind Keys
         game.keybind(65, 'left');
         game.keybind(68, 'right');
@@ -27,17 +28,28 @@ Player = Class.create(Sprite, {
         
         //03 Player Controls
         if(game.input.left && !game.input.right && !game.input.up && !game.input.down){
-            this.x -= moveSpeed;
+            this.lastDirection[0] = -moveSpeed;
+            this.lastDirection[1] = 0;
         }
         else if(game.input.right && !game.input.left && !game.input.up && !game.input.down){
-            this.x += moveSpeed;
+            this.lastDirection[0] = moveSpeed;
+            this.lastDirection[1] = 0;
         }
-        if(game.input.up && !game.input.down && !game.input.left && !game.input.right){
-            this.y -= moveSpeed;
+        else if(game.input.up && !game.input.down && !game.input.left && !game.input.right){
+            this.lastDirection[0] = 0;
+            this.lastDirection[1] = -moveSpeed;
         }
         else if(game.input.down && !game.input.up && !game.input.left && !game.input.right){
-            this.y += moveSpeed;
+            this.lastDirection[0] = 0;
+            this.lastDirection[1] = moveSpeed;
         }
+        else if(!game.input.down && !game.input.up && !game.input.left && !game.input.right) {
+            this.lastDirection[0] = 0;
+            this.lastDirection[1] = 0;
+        }
+
+        this.x += this.lastDirection[0];
+        this.y += this.lastDirection[1];
         
         //04 Mouse Update
     }
