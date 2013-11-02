@@ -31,7 +31,7 @@ function LoadLevel(level) {
         map.push([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
         map.push([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
         map.push([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
-        map.push([6, 7]);
+        map.push([10, 6]);
         player.x = 7 * 16;
         player.y = 13 * 16;
         break;
@@ -56,8 +56,11 @@ function LoadLevel(level) {
     }
     bg = new Sprite(16, 16);
     bg.image = game.assets['icon0.png'];
-    bg.x = map[20][0];
-    bg.y = map[20][1];
+    bg.frame = 10;
+    console.log(map[20][0] + " " + map[20][1]);
+    bg.x = map[20][0] * 16;
+    bg.y = map[20][1] * 16;
+    game.rootScene.addChild(bg);
 
 }
 
