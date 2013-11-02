@@ -11,50 +11,48 @@ function LoadLevel(level) {
     map = [];
     switch (level) {
     case 0:
-        map.push([0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
-        map.push([0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0]);
-        map.push([0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0]);
-        map.push([0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0]);
-        map.push([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0]);
-        map.push([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0]);
-        map.push([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0]);
-        map.push([0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0]);
-        map.push([0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0]);
-        map.push([0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0]);
+        map.push(["-------GGGG---------"]);
+        map.push(["-------GGGGG--------"]);
+        map.push(["--------GGGGG-------"]);
+        map.push(["---------GGGGG------"]);
+        map.push(["----------GGGGG-----"]);
+        map.push(["------------GGG-----"]);
+        map.push(["------------GGG-----"]);
+        map.push(["-------GGGGGGGG-----"]);
+        map.push(["-------GGGGGGG------"]);
+        map.push(["-------GGGGGG-------"]);
         map.push([8, 0]);
         player.x = 7 * 16;
         player.y = 7 * 16;
         break;
-        /*
     case 1:
-        map.push([1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0]);
-        map.push([1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0]);
-        map.push([0, 0, 0, 0, 0, 0, 2, 2, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0]);
-        map.push([0, 0, 0, 0, 0, 0, 2, 2, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0]);
-        map.push([0, 0, 0, 0, 2, 2, 2, 2, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0]);
-        map.push([0, 0, 0, 0, 2, 2, 2, 2, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0]);
-        map.push([2, 2, 1, 1, 1, 1, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0]);
-        map.push([2, 2, 1, 1, 1, 1, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0]);
-        map.push([1, 1, 2, 2, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0]);
-        map.push([1, 1, 2, 2, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0]);
+        map.push(["GGGGGGGGGGGGGG------"]);
+        map.push(["GGGGGGGGGGGGGG------"]);
+        map.push(["------BB----GG------"]);
+        map.push(["------BB----GG------"]);
+        map.push(["----BBBB----GG------"]);
+        map.push(["----BBBB----GG------"]);
+        map.push(["BBBBBB----GGGG------"]);
+        map.push(["BBBBBB----GGGG------"]);
+        map.push(["GGGGGGGGGGGG--------"]);
+        map.push(["GGGGGGGGGGGG--------"]);
         map.push([0, 9]);
         player.x = 0 * 16;
         player.y = 9 * 16;
         break;
-        */
     }
     for (var i = 0; i < 10; i++) {
         for (var j = 0; j < 20; j++) {
             bg = new Sprite(16, 16);
             var tile = map[i][j];
             switch (tile) {
-                case 0:
+                case '-':
                     bg.image = game.assets['Lavasmall.png'];
                     break;
-                case 1:
+                case 'G':
                     bg.image = game.assets['Walkable.png'];
                     break;
-                case 2:
+                case 'B':
                     bg.image = game.assets['Breaking.png'];
             }
             bg.frame = tile;
