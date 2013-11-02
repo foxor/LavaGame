@@ -5,6 +5,7 @@ var health = 5;
 var stgWidth = 320;
 var stgHeight = 320;
 var map = [];
+var curLevel = 0;
 
 function LoadLevel(level) {
     map = [];
@@ -30,6 +31,7 @@ function LoadLevel(level) {
         map.push([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
         map.push([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
         map.push([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
+        map.push([6, 7]);
         player.x = 7 * 16;
         player.y = 11 * 16;
         break;
@@ -52,6 +54,11 @@ function LoadLevel(level) {
             bg.y = i * 16;
         }
     }
+    bg = new Sprite(16, 16);
+    bg.image = game.assets['icon0.png'];
+    bg.x = map[20][0];
+    bg.y = map[20][1];
+
 }
 
 //02 Player Class
@@ -85,6 +92,14 @@ Player = Class.create(Sprite, {
             return true;
         }
         return false;
+    },
+
+    checkLevelComplete: function() {
+        var minX = Math.floor(this.x / 16);
+        var minY = Math.floor(this.y / 16);
+        var maxX = Math.ceil(this.x / 16);
+        var maxY = Math.ceil(this.y / 16);
+
     },
 
     onenterframe: function() {
