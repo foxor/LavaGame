@@ -8,6 +8,7 @@ var map = [];
 var curLevel = 0;
 
 function LoadLevel(level) {
+    console.log(level);
     map = [];
     switch (level) {
     case 0:
@@ -36,7 +37,7 @@ function LoadLevel(level) {
         map.push("BBBBBB----GGGG------");
         map.push("GGGGGGGGGGGG--------");
         map.push("GGGGGGGGGGGG--------");
-        map.push([0, 9]);
+        map.push([9, 0]);
         player.x = 0 * 16;
         player.y = 9 * 16;
         break;
@@ -44,6 +45,7 @@ function LoadLevel(level) {
     for (var i = 0; i < 10; i++) {
         for (var j = 0; j < 20; j++) {
             bg = new Sprite(16, 16);
+            console.log(map[i] + " " + map[i].length);
             var tile = map[i][j];
             switch (tile) {
                 case '-':
@@ -152,6 +154,7 @@ Player = Class.create(Sprite, {
         if (this.checkLevelComplete()) {
             console.log("winna");
             LoadLevel(++curLevel);
+
         }
     }
 });
