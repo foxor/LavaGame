@@ -10,7 +10,7 @@ var curLevel = 0;
 function LoadLevel(level) {
     map = [];
     switch (level) {
-    case 0:
+    case 0: //Level 1
         map.push("-------GGGG---------");
         map.push("-------GGGGG--------");
         map.push("--------GGGGG-------");
@@ -25,18 +25,48 @@ function LoadLevel(level) {
         player.x = 7 * 16;
         player.y = 7 * 16;
         break;
-    case 1:
+    case 1: //Level 2
         map.push("GGGGGGGGGGGGGG------");
         map.push("GGGGGGGGGGGGGG------");
         map.push("------BB----GG------");
-        map.push("------BB----GG------");
-        map.push("----BBBB----GG------");
+        map.push("------BB----BB------");
+        map.push("----BBBB----BB------");
         map.push("----BBBB----GG------");
         map.push("BBBBBB----GGGG------");
         map.push("BBBBBB----GGGG------");
         map.push("GGGGGGGGGGGG--------");
         map.push("GGGGGGGGGGGG--------");
-        map.push([0, 9]);
+        map.push([0, 0]);
+        player.x = 0 * 16;
+        player.y = 9 * 16;
+        break;
+    case 2: //Level 3
+        map.push("----------RRRRRDGGGG");
+        map.push("----------U----DGGGG");
+        map.push("--------GGU----D----");
+        map.push("--RRRRRDGGULLLLL----");
+        map.push("--U----D------------");
+        map.push("--U----D------------");
+        map.push("--U----D------------");
+        map.push("--ULLLLL------------");
+        map.push("GGGG----------------");
+        map.push("GGGG----------------");
+        map.push([9, 0]);
+        player.x = 0 * 16;
+        player.y = 9 * 16;
+        break;
+    case 3: //Level 4
+        map.push("GGGGGGGGGGGGGGGGGGGG");
+        map.push("GGGGGGGGGGGGGGGGGGGG");
+        map.push("GGGGGGGGGGGGGGGGGGGG");
+        map.push("--------GGGG--------");
+        map.push("--------------------");
+        map.push("--------GGGG--------");
+        map.push("GGGGGGGGGGGGGGGGGGGG");
+        map.push("GGGGGGGGGGGGGGGGGGGG");
+        map.push("GGGGGGGGGGGGGGGGGGGG");
+        map.push("GGGGGGGGGGGGGGGGGGGG");
+        map.push([9, 0]);
         player.x = 0 * 16;
         player.y = 9 * 16;
         break;
@@ -54,6 +84,14 @@ function LoadLevel(level) {
                     break;
                 case 'B':
                     bg.image = game.assets['Breaking.png'];
+                case 'U':
+                    //bg.image = game.assets[''];
+                case 'D':
+                    //bg.image = game.assets[''];
+                case 'L':
+                    //bg.image = game.assets[''];
+                case 'R':
+                    //bg.image = game.assets[''];
             }
             bg.frame = tile;
             game.rootScene.addChild(bg);
