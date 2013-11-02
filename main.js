@@ -163,10 +163,10 @@ Player = Class.create(Sprite, {
         var minY = Math.floor((this.y + 5) / 16);
         var maxX = Math.floor((this.x + 7) / 16);
         var maxY = Math.floor((this.y + 12) / 16);
-        if (map[minY][minX] == 0 ||
-            map[minY][maxX] == 0 || 
-            map[maxY][minX] == 0 || 
-            map[maxY][maxX] == 0)
+        if (map[minY][minX] == '-' ||
+            map[minY][maxX] == '-' || 
+            map[maxY][minX] == '-' || 
+            map[maxY][maxX] == '-')
         {
             return true;
         }
@@ -218,10 +218,10 @@ Player = Class.create(Sprite, {
         
         if (this.checkLava()) {
             console.log("Hmmm");
+            LoadLevel(curLevel);
             //gameOver();
         }
         if (this.checkLevelComplete()) {
-            console.log("winna");
             LoadLevel(++curLevel);
 
         }
