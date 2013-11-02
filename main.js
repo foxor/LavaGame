@@ -116,6 +116,10 @@ function LoadLevel(level) {
         player.x = 0 * 16;
         player.y = 9 * 16;
         break;
+    case 7: //Level 8 
+        map.push("--------------------");
+        map.push("--------------------");
+        map.push("--------------------");
     }
     for (var i = 0; i < 10; i++) {
         for (var j = 0; j < 20; j++) {
