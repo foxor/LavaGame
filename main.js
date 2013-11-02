@@ -54,6 +54,10 @@ function LoadLevel(level) {
                     break;
                 case 'B':
                     bg.image = game.assets['Breaking.png'];
+                    break;
+                case 'U':
+                    bg.image = game.assets['FlowingLava.png'];
+                    break;
             }
             bg.frame = tile;
             game.rootScene.addChild(bg);
@@ -161,7 +165,16 @@ window.onload = function() {
     game = new Game(stgWidth, stgHeight);
     //Preload images
     //Any resources not preloaded will not appear
-    game.preload('Character.png', 'diamond-sheet.png', 'bg.png', 'Lavasmall.png', 'Walkable.png', 'icon0.png', 'Breaking.png');
+    game.preload(
+        'Character.png',
+        'diamond-sheet.png',
+        'bg.png',
+        'Lavasmall.png',
+        'Walkable.png',
+        'icon0.png',
+        'Breaking.png',
+        'FlowingLava.png'
+    );
 
     game.onload = function() { //Prepares the game
         player = new Player();
