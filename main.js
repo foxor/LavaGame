@@ -25,6 +25,23 @@ function LoadLevel(level) {
         player.x = 7 * 16;
         player.y = 7 * 16;
         break;
+        /*
+    case 1:
+        map.push([1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0]);
+        map.push([1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0]);
+        map.push([0, 0, 0, 0, 0, 0, 2, 2, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0]);
+        map.push([0, 0, 0, 0, 0, 0, 2, 2, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0]);
+        map.push([0, 0, 0, 0, 2, 2, 2, 2, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0]);
+        map.push([0, 0, 0, 0, 2, 2, 2, 2, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0]);
+        map.push([2, 2, 1, 1, 1, 1, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0]);
+        map.push([2, 2, 1, 1, 1, 1, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0]);
+        map.push([1, 1, 2, 2, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0]);
+        map.push([1, 1, 2, 2, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0]);
+        map.push([0, 9]);
+        player.x = 0 * 16;
+        player.y = 9 * 16;
+        break;
+        */
     }
     for (var i = 0; i < 10; i++) {
         for (var j = 0; j < 20; j++) {
@@ -49,10 +66,10 @@ function LoadLevel(level) {
     bg = new Sprite(16, 16);
     bg.image = game.assets['icon0.png'];
     bg.frame = 10;
+    game.rootScene.addChild(bg);
     bg.x = map[10][0] * 16;
     bg.y = map[10][1] * 16;
-    game.rootScene.addChild(bg);
-
+    console.log(bg.x + " " + bg.y);
 }
 
 //02 Player Class
@@ -62,7 +79,7 @@ Player = Class.create(Sprite, {
         this.image = game.assets['Character.png'];
         this.x = stgWidth/2;
         this.y = stgHeight/2;
-        this.frame = 44;
+        this.frame = 0;
         this.health = 4;
         this.lastDirection = [0,0];
         //03 Bind Keys
@@ -106,10 +123,12 @@ Player = Class.create(Sprite, {
         
         //03 Player Controls
         if(game.input.left && !game.input.right && !game.input.up && !game.input.down){
+            this.frame = 0;
             this.lastDirection[0] = -moveSpeed;
             this.lastDirection[1] = 0;
         }
         else if(game.input.right && !game.input.left && !game.input.up && !game.input.down){
+            this.frame = 1;
             this.lastDirection[0] = moveSpeed;
             this.lastDirection[1] = 0;
         }
@@ -145,7 +164,7 @@ window.onload = function() {
     game = new Game(stgWidth, stgHeight);
     //Preload images
     //Any resources not preloaded will not appear
-    game.preload('Character.png', 'diamond-sheet.png', 'bg.png', 'Lavasmall.png', 'Walkable.png', 'Breaking.png');
+    game.preload('Character.png', 'diamond-sheet.png', 'bg.png', 'Lavasmall.png', 'Walkable.png', 'icon0.png', 'Breaking.png');
 
     game.onload = function() { //Prepares the game
         player = new Player();
