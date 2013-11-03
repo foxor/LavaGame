@@ -66,7 +66,7 @@ function LoadLevel(level) {
     case 3: //Level 4
         map.push("----------RRRRRDGGGG");
         map.push("----------U----DGGGG");
-        map.push("--------GGU----D----");
+        map.push("--------GGU----D----"); // Needs moving platforms on each of the circular lava paths.
         map.push("--RRRRRDGGULLLLL----");
         map.push("--U----D------------");
         map.push("--U----D------------");
@@ -88,7 +88,7 @@ function LoadLevel(level) {
         map.push("--------GGGG--------");
         map.push("GGGGGGGGGGGGGGGGGGGG");
         map.push("GGGGGGGGGGGGGGGGGGGG");
-        map.push("GGGGGGGGGGGGGGGGGGGG");
+        map.push("GGGGGGGGGGGGGGGGGGGG"); // Needs a water droplet on the lower half of the level somewhere.
         map.push("GGGGGGGGGGGGGGGGGGGG");
         map.push([19, 0]);
         map.push([]);
@@ -111,13 +111,13 @@ function LoadLevel(level) {
         player.x = 0 * 16;
         player.y = 9 * 16;
         break;
-    case 6: //Level 7 Needs water buckets / refills every other line of ground.
+    case 6: //Level 7 
         map.push("GGGGGGGGGGGGGGGGGGGG");
         map.push("GGGGGGGGGGGGGGGGGGGG");
-        map.push("GGGGGGGGGGGGGGGGGGGG");
-        map.push("LLLLLLLLLLLLLLLLLLLL");
-        map.push("GGGGGGGGGGGGGGGGGGGG");
-        map.push("LLLLLLLLLLLLLLLLLLLL");
+        map.push("GGGGGGGGGGGGGGGGGGGG"); //Needs water buckets on every line of ground between the flowing lava.
+        map.push("LLLLLLLLLLLLLLLLLLLL"); //Needs coding where flowing lava turns to stationary lava
+        map.push("GGGGGGGGGGGGGGGGGGGG"); //if the source / beginning point of the flowing lava line is
+        map.push("LLLLLLLLLLLLLLLLLLLL"); //turned into a platform by the player using a water droplet.
         map.push("GGGGGGGGGGGGGGGGGGGG");
         map.push("LLLLLLLLLLLLLLLLLLLL");
         map.push("GGGGGGGGGGGGGGGGGGGG");
@@ -129,60 +129,60 @@ function LoadLevel(level) {
         break;
     case 7: //Level 8 
         map.push("------UUUDDD--UGGUGG");
-        map.push("------UUUDDD--UGGUGG");
-        map.push("------UUUDDD--UGGUGG");
+        map.push("------UUUDDD--UGGUGG"); //Needs moving platforms on the first 3 U-flowing-lava-lines 
+        map.push("------UUUDDD--UGGUGG"); //and on the first 3 D-flowing-lava-lines.
         map.push("------UUUDDD--UGGUGG");
         map.push("------UUUDDD--UGGUGG");
         map.push("------UUUDDDGGUGGUGG");
-        map.push("------UUUDDD--UGGUGG");
+        map.push("------UUUDDD--UGGUGG"); //Needs water on the first G in this line.
         map.push("GGGGGGUUUDDD--UGGUGG");
         map.push("GGGGGGUUUDDD--UGGUGG");
-        map.push("GGGGGGUUUDDDGGUGGUGG");
+        map.push("GGGGGGUUUDDDGGUGGUGG"); //Needs water on the fourth to last G in this line.
         map.push([19,0]);
         player.x = 0*16;
         player.y = 9*16;
         break;
     case 8: //Level 9
-        map.push("----GGGG-D----GG----");
+        map.push("----GGGG-D----GG----"); //Needs water on the first and the second G of this line.
         map.push("----B----D----GG----");
         map.push("----B----D----GG----");
-        map.push("----RRRRDD----GG----");
-        map.push("----U---DD----GG----");
+        map.push("----RRRRDD----GG----"); //Needs a moving platform on the circular flowing lava.
+        map.push("----U---DD----GG----"); //Needs a moving platform on the line of D-flowing lava.
         map.push("----U---DD----GG----");
         map.push("----ULLLLD----------");
         map.push("----GG---D---G------");
         map.push("----GG---D---BG-----");
-        map.push("----GG---DGGGGG-----");
+        map.push("----GG---DGGGGG-----"); //Needs a water droplet on the first and fourth G of this line.
         map.push([15,0]);
         player.x = 4*16;
         player.y = 9*16;
         break;
     case 9: //Level 10
         map.push("GGGGGGGGGGGGGGGGGGGG");
-        map.push("RRRRRRRRRRRRRRRRRRRR");
-        map.push("LLLLLLLLLLLLLLLLLLLL");
+        map.push("RRRRRRRRRRRRRRRRRRRR"); //Needs a moving platform on this line.
+        map.push("LLLLLLLLLLLLLLLLLLLL"); //Needs a moving platform on this line.
         map.push("--------BBBBBBBBBBBB");
         map.push("--------G-----------");
-        map.push("GG------G-----------");
+        map.push("GG------G-----------"); //Needs a water droplet on the first G of this line.
         map.push("RRRRRRRRRRRRRRRRRRRR");
-        map.push("GGGG----G-----------");
-        map.push("GGGG----G-----------");
-        map.push("GGGGBGGBBGG---------");
+        map.push("GGGG----G-----------"); //Needs a water droplet on the first and fifth G of this line.
+        map.push("GGGG----G-----------"); 
+        map.push("GGGGBGGBBGG---------"); //Needs a water droplet on the 5 and 7th G of this line.
         map.push([19,0]);
         player.x = 0*16;
         player.y = 9*16;
         break;
     case 10: //Level 11
-        map.push("--D--GGG-G-GGGRRRRRD");
-        map.push("GGDG---RD-----U----D");
+        map.push("--D--GGG-G-GGGRRRRRD"); //Needs a moving platform on the D-flowing lava line (starts at [2,0])
+        map.push("GGDG---RD-----U----D"); //Needs a water droplet on the first G in this line.
         map.push("--DB---UD-----ULLLLL");
         map.push("--DB---UD-----------");
-        map.push("--DB---UD-----------");
-        map.push("--DB---UD-----------");
+        map.push("--DB---UD-----------"); //Needs a moving platform on the circular flowing lava spiral at the end
+        map.push("--DB---UD-----------"); // and the circular flowing lava spiral in the middle of the level.
         map.push("--DB---UD-----------");
         map.push("--DB---UL-----------");
-        map.push("GGDB-GGGGG----------");
-        map.push("GGDG-G--------------");
+        map.push("GGDB-GGGGG----------"); //Needs water on the fifth G in this line.
+        map.push("GGDG-G--------------"); //Needs a water droplet on the first G in this line.
         map.push([19,0]);
         player.x = 0*16;
         player.y = 9*16;
