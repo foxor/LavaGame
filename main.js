@@ -417,6 +417,7 @@ Tile = Class.create(Sprite, {
         case 'W':
             if (this.intersect(player)) {
                 player.isHolding = this;
+                player.isHolding.rotation = 0;
             }
             break;
         }
@@ -557,7 +558,10 @@ Player = Class.create(Sprite, {
         this.checkBlocks();
 
         if (this.isHolding != null) {
-            this.isHolding.x = this.x;
+            this.isHolding.image = game.assets['WaterSwirl0.png'];
+            // if (new Date().getTime() % 100 < 90)
+                this.isHolding.rotation += 10;
+            this.isHolding.x = this.x - 2;
             this.isHolding.y = this.y - 16;
         }
     }
@@ -579,7 +583,8 @@ window.onload = function() {
         'FlowingLava.png',
         'MovingBlock.png',
         'blackout.png',
-        'WaterDrop.png'
+        'WaterDrop.png',
+        'WaterSwirl0.png'
     );
 
     game.onload = function() { //Prepares the game
