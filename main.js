@@ -22,14 +22,14 @@ function LoadLevel(level) {
     map = [];
     switch (level) {
     case 0: //Level 1
-        map.push("-------GGGG---------");
-        map.push("-------GGGGG--------");
-        map.push("--------GGGGG-------");
-        map.push("---------GGGGG------");
-        map.push("----------GGGGG-----");
-        map.push("------------GGG-----");
-        map.push("------------GGG-----");
-        map.push("-------GGGGGGGG-----");
+        map.push("-GGG---GGGG----GG-G-");
+        map.push("--GG---GGGGG----GGG-");
+        map.push("--------GGGGG----G--");
+        map.push("--GG-----GGGGGGGGG--");
+        map.push("---G------GGGGG--G--");
+        map.push("---G--------GGG-----");
+        map.push("-GGGG-------GGG-----");
+        map.push("-GG----GGGGGGGG-----");
         map.push("-------GGGGGGG------");
         map.push("-------GGGGGG-------");
         map.push([8, 0]);
@@ -38,14 +38,14 @@ function LoadLevel(level) {
         player.y = 7 * 16;
         break;
     case 1: //Level 2
-        map.push("GGGGGGGGGGGGGG------");
-        map.push("GGGGGGGGGGGGGG------");
-        map.push("------BB----GG------");
-        map.push("------BB----BB------");
-        map.push("----BBBB----BB------");
-        map.push("----BBBB----GG------");
-        map.push("BBBBBB----GGGG------");
-        map.push("BBBBBB----GGGG------");
+        map.push("GGGGGGGGGGGGGG-GG---");
+        map.push("GGGGGGGGGGGGGG-GGG--");
+        map.push("------BB----GG--GG--");
+        map.push("------BB----BB--GG--");
+        map.push("----BBBB----BB--GG--");
+        map.push("----BBBB----GG--GG--");
+        map.push("BBBBBB----GGGGGGGG--");
+        map.push("BBBBBB----GGGGG-----");
         map.push("GGGGGGGGGGGG--------");
         map.push("GGGGGGGGGGGG--------");
         map.push([3, 0]);
@@ -54,12 +54,12 @@ function LoadLevel(level) {
         player.y = 9 * 16;
         break;
     case 2: //Level 3
-        map.push("GBBBBBBBBBBBBBBBBBBB");
+        map.push("GBBBBBB---BBGGGBBBBB");
+        map.push("BBBBBBBBBBBBGGG---BB");
+        map.push("BBBBB-----BBGGGBBBBB");
         map.push("BBBBBBBBBBBBBBBBBBBB");
-        map.push("BBBBBBBBBBBBBBBBBBBB");
-        map.push("BBBBBBBBBBBBBBBBBBBB");
-        map.push("BBBBBBBBBBBBBBBBBBBB");
-        map.push("BBBBBBBBBBBBBBBBBBBB");
+        map.push("-----BBBBBB---------");
+        map.push("--------BBBB--------");
         map.push("--------BB----------");
         map.push("BBBBBBBBBBBBBBBBBBBB");
         map.push("BB------------------");
@@ -74,11 +74,11 @@ function LoadLevel(level) {
         map.push("----------U----DGGGG");
         map.push("--------GGU----D----"); // Needs moving platforms on each of the circular lava paths.
         map.push("--RRRRRDGGULLLLL----");
-        map.push("--U----D------------");
-        map.push("--U----D------------");
-        map.push("--U----D------------");
-        map.push("--ULLLLL------------");
-        map.push("GGGG----------------");
+        map.push("--U----D-----BGG----");
+        map.push("--U----D-----B------");
+        map.push("--U----D---BBG------");
+        map.push("--ULLLLLGGGG--------");
+        map.push("GGGG----GGG---------");
         map.push("GGGG----------------");
         map.push([19, 0]);
         map.push([[7, 3],[10,3]]);
