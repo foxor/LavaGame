@@ -8,6 +8,10 @@ var map = [];
 var curLevel = 0;
 
 function LoadLevel(level) {
+    oldChildren = game.rootScene.childNodes;
+    for (var i = 0; i < oldChildren.length; i++) {
+        game.rootScene.removeChild(oldChildren[i]);
+    }
     console.log(level);
     map = [];
     switch (level) {
@@ -193,7 +197,6 @@ function LoadLevel(level) {
         bg.y = map[11][1] * 16;
     }
 
-    game.rootScene.removeChild(player);
     game.rootScene.addChild(player);
 }
 
