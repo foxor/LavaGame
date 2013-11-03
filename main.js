@@ -211,7 +211,7 @@ function LoadLevel(level) {
         map.push("GGGGGGGGGGGGGGGGGGGG");
         map.push([19, 0]);
         map.push([]);
-        map.push([[9,6], [2,6], [2, 4]]);
+        map.push([[2,9], [2,6], [8, 6]]);
         player.x = 0 * 16;
         player.y = 9 * 16;
         break;
