@@ -316,6 +316,25 @@ Tile = Class.create(Sprite, {
                     Math.floor((this.y + 8) / 16) * 16
                 ];
             }
+            if (this.destination != null) {
+               if (Math.abs(this.x - this.destination[0]) <= moveSpeed) {
+                   this.dx = this.destination[0] - this.x;
+               }
+               else {
+                   this.dx = this.destination[0] - this.x > 0 ? moveSpeed : -moveSpeed;
+               }
+
+               if (Math.abs(this.y - this.destination[1]) <= moveSpeed) {
+                   this.dy = this.destination[1] - this.y;
+               }
+               else {
+                   this.dy = this.destination[1] - this.y > 0 ? moveSpeed : -moveSpeed;
+               }
+
+               if (this.dx == 0 && this.dy == 0) {
+                   this.destination = null;
+               }
+            }
             if (this.destination == null) {
                 switch (TileUnder.c) {
                 case 'U':
@@ -335,27 +354,6 @@ Tile = Class.create(Sprite, {
                     this.dy = 0;
                     break;
                 }
-            }
-            else {
-               if (Math.abs(this.x - this.destination[0]) <= moveSpeed) {
-                   this.x = this.destination[0];
-                   this.dx = 0;
-               }
-               else {
-                   this.dx = this.destination[0] - this.x > 0 ? moveSpeed : -moveSpeed;
-               }
-
-               if (Math.abs(this.y - this.destination[1]) <= moveSpeed) {
-                   this.y = this.destination[1];
-                   this.dy = 0;
-               }
-               else {
-                   this.dy = this.destination[1] - this.y > 0 ? moveSpeed : -moveSpeed;
-               }
-
-               if (this.dx == 0 && this.dy == 0) {
-                   this.destination = null;
-               }
             }
             if (this.intersect(player)) {
                 player.onBlock = this;
