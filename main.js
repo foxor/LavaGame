@@ -7,8 +7,17 @@ var stgHeight = 160;
 var map = [];
 var curLevel = 0;
 var tiles = [];
+var timeouts = [];
+
+var bgMusic = new Howl({
+  urls: ['bgmusic.mp3'],
+  loop: true
+});
 
 function LoadLevel(level) {
+    for (var i = 0; i < timeouts.length; i++) {
+        clearTimeout(timeouts[i]);
+    }
     for (var i = 0; i < tiles.length; i++) {
         game.rootScene.removeChild(tiles[i]);
     }
@@ -43,13 +52,13 @@ function LoadLevel(level) {
         map.push("BBBBBB----GGGG------");
         map.push("GGGGGGGGGGGG--------");
         map.push("GGGGGGGGGGGG--------");
-        map.push([0, 0]);
+        map.push([3, 0]);
         map.push([]);
         player.x = 0 * 16;
         player.y = 9 * 16;
         break;
     case 2: //Level 3
-        map.push("BBBBBBBBBBBBBBBBBBBB");
+        map.push("GBBBBBBBBBBBBBBBBBBB");
         map.push("BBBBBBBBBBBBBBBBBBBB");
         map.push("BBBBBBBBBBBBBBBBBBBB");
         map.push("BBBBBBBBBBBBBBBBBBBB");
@@ -140,6 +149,7 @@ function LoadLevel(level) {
         map.push("GGGGGGUUUDDD--UGGUGG");
         map.push("GGGGGGUUUDDDGGUGGUGG"); //Needs water on the fourth to last G in this line.
         map.push([19,0]);
+        map.push([]);
         player.x = 0*16;
         player.y = 9*16;
         break;
@@ -155,6 +165,7 @@ function LoadLevel(level) {
         map.push("----GG---D---BG-----");
         map.push("----GG---DGGGGG-----"); //Needs a water droplet on the first and fourth G of this line.
         map.push([15,0]);
+        map.push([]);
         player.x = 4*16;
         player.y = 9*16;
         break;
@@ -170,6 +181,7 @@ function LoadLevel(level) {
         map.push("GGGG----G-----------"); 
         map.push("GGGGBGGBBGG---------"); //Needs a water droplet on the 5 and 7th G of this line.
         map.push([19,0]);
+        map.push([]);
         player.x = 0*16;
         player.y = 9*16;
         break;
@@ -185,6 +197,7 @@ function LoadLevel(level) {
         map.push("GGDB-GGGGG----------"); //Needs water on the fifth G in this line.
         map.push("GGDG-G--------------"); //Needs a water droplet on the first G in this line.
         map.push([19,0]);
+        map.push([]);
         player.x = 0*16;
         player.y = 9*16;
         break;
@@ -195,6 +208,7 @@ function LoadLevel(level) {
             bg = new Tile();
             var tile = map[i][j];
             bg.c = tile;
+            bg.age2 = 0;
             switch (tile) {
                 case '-':
                     bg.image = game.assets['Lavasmall.png'];
@@ -360,6 +374,14 @@ Player = Class.create(Sprite, {
                 LoadLevel(curLevel);
             }
             return;
+        case 'B':
+            console.log(block.x + " " + block.y);
+            var bx = block.x, by = block.y
+            timeouts.push(setTimeout(function(bx, by) {
+                map[y][x].image = game.assets['Lavasmall.png'];
+                map[y][x].c = '-';
+            }, 1000));
+            return;
         }
 
         if (map[10][0] == x && map[10][1] == y) {
@@ -443,6 +465,7 @@ window.onload = function() {
 
     game.onload = function() { //Prepares the game
         player = new Player();
+        bgMusic.play();
         LoadLevel(curLevel);
         //05 Add Gem
         
