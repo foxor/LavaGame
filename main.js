@@ -21,6 +21,7 @@ function LoadLevel(level) {
     for (var i = 0; i < tiles.length; i++) {
         game.rootScene.removeChild(tiles[i]);
     }
+    player.lastDirection = [0,0];
     tiles = [];
     map = [];
     switch (level) {
@@ -84,7 +85,7 @@ function LoadLevel(level) {
         map.push("GGGG----------------");
         map.push("GGGG----------------");
         map.push([19, 0]);
-        map.push([7, 3]);
+        map.push([[7, 3]]);
         player.x = 0 * 16;
         player.y = 9 * 16;
         break;
@@ -255,12 +256,12 @@ function LoadLevel(level) {
 
     //Moving Platforms
     for (var i = 0; i < map[11].length; i++) {
-        bg = new Sprite(16, 16);
+        bg = new Tile(16, 16);
         bg.image = game.assets['MovingBlock.png'];
         bg.c = 'M';
         game.rootScene.addChild(bg);
-        bg.x = map[11][0] * 16;
-        bg.y = map[11][1] * 16;
+        bg.x = map[11][i][0] * 16;
+        bg.y = map[11][i][1] * 16;
         tiles.push(bg);
     }
 
@@ -274,13 +275,21 @@ Tile = Class.create(Sprite, {
         this.LastTile = null;
         this.dx = 0;
         this.dy = 0;
+        this.destination = null;
     },
 
     onenterframe: function() {
         switch (this.c) {
         case 'M':
-            var TileUnder = map[Math.floor((this.x + 8) / 16)][Math.floor((this.y + 8) / 16)];
+            var TileUnder = map[Math.floor((this.y + 8) / 16)][Math.floor((this.x + 8) / 16)];
             if (TileUnder != this.LastTile) {
+                this.LastTile = TileUnder;
+                this.destination = [
+                    Math.floor((this.x + 8) / 16) * 16,
+                    Math.floor((this.y + 8) / 16) * 16
+                ];
+            }
+            if (this.destination == null) {
                 switch (TileUnder.c) {
                 case 'U':
                     this.dx = 0;
@@ -299,6 +308,30 @@ Tile = Class.create(Sprite, {
                     this.dy = 0;
                     break;
                 }
+            }
+            else {
+               if (Math.abs(this.x - this.destination[0]) <= moveSpeed) {
+                   this.x = this.destination[0];
+                   this.dx = 0;
+               }
+               else {
+                   this.dx = this.destination[0] - this.x > 0 ? moveSpeed : -moveSpeed;
+               }
+
+               if (Math.abs(this.y - this.destination[1]) <= moveSpeed) {
+                   this.y = this.destination[1];
+                   this.dy = 0;
+               }
+               else {
+                   this.dy = this.destination[1] - this.y > 0 ? moveSpeed : -moveSpeed;
+               }
+
+               if (this.dx == 0 && this.dy == 0) {
+                   this.destination = null;
+               }
+            }
+            if (this.intersect(player)) {
+                player.onBlock = this;
             }
             break;
         }
@@ -333,7 +366,13 @@ Player = Class.create(Sprite, {
         block = map[y][x];
         switch (block.c) {
         case '-':
-            LoadLevel(curLevel);
+        case 'U':
+        case 'D':
+        case 'L':
+        case 'R':
+            if (this.onBlock == null) {
+                LoadLevel(curLevel);
+            }
             return;
         case 'B':
             console.log(block.x + " " + block.y);
@@ -400,6 +439,10 @@ Player = Class.create(Sprite, {
         }
         
         this.checkBlocks();
+
+        if (this.onBlock == null || Math.abs(this.onBlock.x - this.x) > 16 || Math.abs(this.onBlock.y - this.y) > 16) {
+            this.onBlock = null;
+        }
     }
 });
 
@@ -424,7 +467,6 @@ window.onload = function() {
         player = new Player();
         bgMusic.play();
         LoadLevel(curLevel);
-        game.rootScene.addChild(player);
         //05 Add Gem
         
         //06 Create Label
