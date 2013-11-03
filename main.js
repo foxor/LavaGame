@@ -139,6 +139,7 @@ function LoadLevel(level) {
                 case 'R':
                     //bg.image = game.assets[''];
             }
+            map[i][j].age = 1;
             bg.frame = tile;
             game.rootScene.addChild(bg);
             bg.x = j * 16;
@@ -188,11 +189,26 @@ Player = Class.create(Sprite, {
         return false;
     },
 
+    checkStepOnBreaking: function() {
+        var minX = Math.floor(this.x / 16);
+        var minY = Math.floor((this.y + 5) / 16);
+        var maxX = Math.floor((this.x + 7) / 16);
+        var maxY = Math.floor((this.y + 12) / 16);
+        if (map[minY][minX] == 'B' ||
+            map[minY][maxX] == 'B' || 
+            map[maxY][minX] == 'B' || 
+            map[maxY][maxX] == 'B')
+        {
+            return true;
+        }
+        return false;
+    },
+
     checkLevelComplete: function() {
         var minX = Math.floor(this.x / 16);
-        var minY = Math.floor(this.y / 16);
-        var maxX = Math.ceil(this.x / 16);
-        var maxY = Math.ceil(this.y / 16);
+        var minY = Math.floor((this.y + 5) / 16);
+        var maxX = Math.floor((this.x + 7) / 16);
+        var maxY = Math.floor((this.y + 12) / 16);
         var winX = map[10][0];
         var winY = map[10][1];
         if (minX <= winX && maxX >= winX && minY <= winY && maxY >= winY)
@@ -232,13 +248,13 @@ Player = Class.create(Sprite, {
         this.y += this.lastDirection[1];
         
         if (this.checkLava()) {
-            console.log("Hmmm");
             LoadLevel(curLevel);
-            //gameOver();
+        }
+        if (this.checkStepOnBreaking()) {
+            console.log("BOOM");
         }
         if (this.checkLevelComplete()) {
             LoadLevel(++curLevel);
-
         }
     }
 });
