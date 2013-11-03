@@ -49,7 +49,7 @@ function LoadLevel(level) {
         map.push("GGGGGGGGGGGGGG-GGG--");
         map.push("------BB----GG--GG--");
         map.push("------BB----BB--GG--");
-        map.push("----BBBB----BB--GG--");
+        map.push("-----BBB----BB--GG--");
         map.push("----BBBB----GG--GG--");
         map.push("BBBBBB----GGGGGGGG--");
         map.push("BBBBBB----GGGGG-----");
@@ -66,12 +66,12 @@ function LoadLevel(level) {
         map.push("BBBBBBBBBBBBGGG---BB");
         map.push("BBBBB-----BBGGGBBBBB");
         map.push("BBBBBBBBBBBBBBBBBBBB");
-        map.push("-----BBBBBB---------");
-        map.push("--------BBBB--------");
-        map.push("--------BB----------");
+        map.push("-----BBBBBB------B--");
+        map.push("BBB-----BBBB--B--BBB");
+        map.push("--------BB---------B");
         map.push("BBBBBBBBBBBBBBBBBBBB");
         map.push("BB------------------");
-        map.push("BBBBBBBBBBBBBBBBBBBB");
+        map.push("BBBBBBBBBBBBBBBBBBBG");
         map.push([0, 0]);
         map.push([]);
         map.push([]);
@@ -402,7 +402,7 @@ Player = Class.create(Sprite, {
 
     blockLogic: function(y, x) {
         if (map[y] == null || map[y][x] == null) {
-            return;
+            return false;
         }
         block = map[y][x];
         switch (block.c) {
@@ -414,6 +414,7 @@ Player = Class.create(Sprite, {
             if (this.onBlock == null) {
                 if (this.isHolding == null) {
                     LoadLevel(curLevel);
+                    return true;
                 }
                 else {
                     block.c = 'G';
@@ -422,17 +423,18 @@ Player = Class.create(Sprite, {
                     this.isHolding = null;
                 }
             }
-            return;
+            return false;
         case 'B':
             var bx = block.x, by = block.y;
             if (block.ttl == null) {
                 block.ttl = 20;
             }
-            return;
+            return false;
         }
 
         if (map[10][0] == x && map[10][1] == y) {
             LoadLevel(++curLevel);
+            return true;
         }
     },
 
@@ -441,10 +443,10 @@ Player = Class.create(Sprite, {
         var minY = Math.floor((this.y + 5) / 16);
         var maxX = Math.floor((this.x + 7) / 16);
         var maxY = Math.floor((this.y + 12) / 16);
-        this.blockLogic(minY, minX);
-        this.blockLogic(minY, maxX);
-        this.blockLogic(maxY, minX);
-        this.blockLogic(maxY, maxX);
+        if (this.blockLogic(minY, minX)) return;
+        if (this.blockLogic(minY, maxX)) return;
+        if (this.blockLogic(maxY, minX)) return;
+        if (this.blockLogic(maxY, maxX)) return;
     },
 
     onenterframe: function() {
