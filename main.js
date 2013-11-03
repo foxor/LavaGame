@@ -64,9 +64,9 @@ function LoadLevel(level) {
         map.push("BBBBBBBBBBBBBBBBBBBB");
         map.push("BBBBBBBBBBBBBBBBBBBB");
         map.push("BBBBBBBBBBBBBBBBBBBB");
+        map.push("--------BB----------");
         map.push("BBBBBBBBBBBBBBBBBBBB");
-        map.push("BBBBBBBBBBBBBBBBBBBB");
-        map.push("BBBBBBBBBBBBBBBBBBBB");
+        map.push("BB------------------");
         map.push("BBBBBBBBBBBBBBBBBBBB");
         map.push([0, 0]);
         map.push([]);
