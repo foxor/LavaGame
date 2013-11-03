@@ -492,7 +492,7 @@ Player = Class.create(Sprite, {
             maxY = Math.floor((this.y + 12) / 16);
         }
         else {
-            minX = Math.floor(this.x + 5 / 16);
+            minX = Math.floor((this.x + 5) / 16);
             minY = Math.floor((this.y + 5) / 16);
             maxX = Math.floor((this.x + 12) / 16);
             maxY = Math.floor((this.y + 12) / 16);
