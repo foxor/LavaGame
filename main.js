@@ -6,13 +6,13 @@ var stgWidth = 320;
 var stgHeight = 160;
 var map = [];
 var curLevel = 0;
+var tiles = [];
 
 function LoadLevel(level) {
-    oldChildren = game.rootScene.childNodes;
-    for (var i = 0; i < oldChildren.length; i++) {
-        game.rootScene.removeChild(oldChildren[i]);
+    for (var i = 0; i < tiles.length; i++) {
+        game.rootScene.removeChild(tiles[i]);
     }
-    console.log(level);
+    tiles = [];
     map = [];
     switch (level) {
     case 0: //Level 1
@@ -177,6 +177,7 @@ function LoadLevel(level) {
             game.rootScene.addChild(bg);
             bg.x = j * 16;
             bg.y = i * 16;
+            tiles.push(bg);
         }
     }
 
@@ -187,6 +188,7 @@ function LoadLevel(level) {
     game.rootScene.addChild(bg);
     bg.x = map[10][0] * 16;
     bg.y = map[10][1] * 16;
+    tiles.push(bg);
 
     //Moving Platforms
     for (var i = 0; i < map[11].length; i++) {
@@ -195,8 +197,10 @@ function LoadLevel(level) {
         game.rootScene.addChild(bg);
         bg.x = map[11][0] * 16;
         bg.y = map[11][1] * 16;
+        tiles.push(bg);
     }
 
+    game.rootScene.removeChild(player);
     game.rootScene.addChild(player);
 }
 
