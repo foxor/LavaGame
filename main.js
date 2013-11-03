@@ -473,8 +473,8 @@ Player = Class.create(Sprite, {
             this.lastDirection[1] = 0;
         }
         
-        this.x += this.lastDirection[0];
-        this.y += this.lastDirection[1];
+        this.x = Math.min(Math.max(this.x + this.lastDirection[0], 0), stgWidth - 12);
+        this.y = Math.min(Math.max(this.y + this.lastDirection[1], 0), stgHeight - 12);
         blackOut.x = this.x - 320;
         blackOut.y = this.y - 160;
 
