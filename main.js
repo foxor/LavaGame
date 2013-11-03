@@ -174,48 +174,28 @@ Player = Class.create(Sprite, {
         //04 Mouse Variables
     },
 
-    checkLava: function() {
-        var minX = Math.floor(this.x / 16);
-        var minY = Math.floor((this.y + 5) / 16);
-        var maxX = Math.floor((this.x + 7) / 16);
-        var maxY = Math.floor((this.y + 12) / 16);
-        if (map[minY][minX] == '-' ||
-            map[minY][maxX] == '-' || 
-            map[maxY][minX] == '-' || 
-            map[maxY][maxX] == '-')
-        {
-            return true;
+    blockLogic: function(y, x) {
+        block = map[y][x];
+        switch (block) {
+        case '-':
+            LoadLevel(curLevel);
+            return;
         }
-        return false;
+
+        if (map[10][0] == x && map[10][1] == y) {
+            LoadLevel(++curLevel);
+        }
     },
 
-    checkStepOnBreaking: function() {
+    checkBlocks: function() {
         var minX = Math.floor(this.x / 16);
         var minY = Math.floor((this.y + 5) / 16);
         var maxX = Math.floor((this.x + 7) / 16);
         var maxY = Math.floor((this.y + 12) / 16);
-        if (map[minY][minX] == 'B' ||
-            map[minY][maxX] == 'B' || 
-            map[maxY][minX] == 'B' || 
-            map[maxY][maxX] == 'B')
-        {
-            return true;
-        }
-        return false;
-    },
-
-    checkLevelComplete: function() {
-        var minX = Math.floor(this.x / 16);
-        var minY = Math.floor((this.y + 5) / 16);
-        var maxX = Math.floor((this.x + 7) / 16);
-        var maxY = Math.floor((this.y + 12) / 16);
-        var winX = map[10][0];
-        var winY = map[10][1];
-        if (minX <= winX && maxX >= winX && minY <= winY && maxY >= winY)
-        {
-            return true;
-        }
-        return false;
+        this.blockLogic(minY, minX);
+        this.blockLogic(minY, maxX);
+        this.blockLogic(maxY, minX);
+        this.blockLogic(maxY, maxX);
     },
 
     onenterframe: function() {
@@ -247,17 +227,7 @@ Player = Class.create(Sprite, {
         this.x += this.lastDirection[0];
         this.y += this.lastDirection[1];
         
-        if (this.checkLava()) {
-            console.log("Hmmm");
-            LoadLevel(curLevel);
-            //gameOver();
-        }
-        if (this.checkStepOnBreaking()) {
-            console.log("BOOM");
-        }
-        if (this.checkLevelComplete()) {
-            LoadLevel(++curLevel);
-        }
+        this.checkBlocks();
     }
 });
 
