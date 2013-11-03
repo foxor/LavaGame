@@ -13,7 +13,11 @@ var bgMusic = new Howl({
   loop: true
 });
 
+var blackOut;
+
 function LoadLevel(level) {
+    game.rootScene.removeChild(blackOut);
+    game.rootScene.removeChild(player);
     for (var i = 0; i < tiles.length; i++) {
         game.rootScene.removeChild(tiles[i]);
     }
@@ -261,8 +265,8 @@ function LoadLevel(level) {
         tiles.push(bg);
     }
 
-    game.rootScene.removeChild(player);
     game.rootScene.addChild(player);
+    game.rootScene.addChild(blackOut);
 }
 
 Tile = Class.create(Sprite, {
@@ -434,6 +438,8 @@ Player = Class.create(Sprite, {
         
         this.x += this.lastDirection[0];
         this.y += this.lastDirection[1];
+        blackOut.x = this.x - 320;
+        blackOut.y = this.y - 160;
 
         if (this.onBlock != null) {
             this.x += this.onBlock.dx;
@@ -462,11 +468,14 @@ window.onload = function() {
         'icon0.png',
         'Breaking.png',
         'FlowingLava.png',
-        'MovingBlock.png'
+        'MovingBlock.png',
+        'blackout.png'
     );
 
     game.onload = function() { //Prepares the game
         player = new Player();
+        blackOut = new Sprite(640, 320);
+        blackOut.image = game.assets['blackout.png'];
         bgMusic.play();
         LoadLevel(curLevel);
         //05 Add Gem
