@@ -211,7 +211,7 @@ function LoadLevel(level) {
         map.push("GGGGGGGGGGGGGGGGGGGG");
         map.push([19, 0]);
         map.push([]);
-        map.push([]);
+        map.push([[2,9], [2,6], [2, 4]]);
         player.x = 0 * 16;
         player.y = 9 * 16;
         break;
@@ -529,9 +529,6 @@ Player = Class.create(Sprite, {
         this.onBlock = nextBlocks;
         
         if (this.onBlock.length > 0) {
-            if (this.onBlock.length >= 2) {
-                console.log("Halp");
-            }
             blockDx /= this.onBlock.length;
             blockDy /= this.onBlock.length;
             this.x += blockDx;
