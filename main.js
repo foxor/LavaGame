@@ -5,8 +5,9 @@ var health = 5;
 var stgWidth = 320;
 var stgHeight = 160;
 var map = [];
-var curLevel = 0;
+var curLevel = 5;
 var tiles = [];
+var platformTimers = [];
 
 var bgMusic = new Howl({
   urls: ['bgmusic.mp3'],
@@ -61,10 +62,19 @@ function SpawnBlock(x, y, c) {
     return tile;
 }
 
-function LavaSpawnClosure(x, y, t) {
+function LavaSpawnClosure(x, y, t, dt) {
     var closure = function() {
+        if (--closure.timer <= 0) {
+            closure.timer = t;
+            SpawnBlock(x, y, 'M');
+            game.rootScene.removeChild(player);
+            game.rootScene.removeChild(blackOut);
+            game.rootScene.addChild(player);
+            game.rootScene.addChild(blackOut);
+        }
     };
-    closure.t = t;
+    closure.timer = t + dt;
+    return closure;
 }
 
 function LoadLevel(level) {
@@ -74,7 +84,7 @@ function LoadLevel(level) {
         game.rootScene.removeChild(tiles[i]);
     }
     player.lastDirection = [0,0];
-    player.onBlock = null;
+    player.onBlock = [];
     player.isHolding = null;
     tiles = [];
     map = [];
@@ -135,7 +145,7 @@ function LoadLevel(level) {
         map.push("----------U----DGGGG");
         map.push("--------GGU----D----"); // Needs moving platforms on each of the circular lava paths.
         map.push("--RRRRRDGGULLLLL----");
-        map.push("--U----D-----BGG----");
+        map.push("--U----DGG---BGG----");
         map.push("--U----D-----B------");
         map.push("--U----D---BBG------");
         map.push("--ULLLLLGGGG--------");
@@ -176,7 +186,14 @@ function LoadLevel(level) {
         map.push("GGGGGGGGGGGGGGGGGGGG");
         map.push("GGGGGGGGGGGGGGGGGGGG");
         map.push([19, 0]);
-        map.push([[0, 7, 50]]);
+        map.push([
+            [0, 7, 60, -50],
+            [0, 5, 60, -40],
+            [0, 3, 60, -30],
+            [19, 6, 60, -20],
+            [19, 4, 60, -10],
+            [19, 2, 60, 0],
+        ]);
         map.push([]);
         player.x = 0 * 16;
         player.y = 9 * 16;
@@ -279,8 +296,19 @@ function LoadLevel(level) {
     SpawnBlock(map[10][0] * 16, map[10][1] * 16, 'g');
 
     //Moving Platforms
+    platformTimers = [];
     for (var i = 0; i < map[11].length; i++) {
-        SpawnBlock(map[11][i][0] * 16, map[11][i][1] * 16, 'M');
+        var blockSpawner = new LavaSpawnClosure(
+            map[11][i][0] * 16,
+            map[11][i][1] * 16,
+            map[11][i][2],
+            map[11][i][3]
+        );
+
+        blockSpawner();
+        if (blockSpawner.timer > 0) {
+            platformTimers.push(blockSpawner);
+        }
     }
 
     //Water
@@ -307,6 +335,9 @@ Tile = Class.create(Sprite, {
         switch (this.c) {
         case 'M':
             var TileUnder = map[Math.floor((this.y + 8) / 16)][Math.floor((this.x + 8) / 16)];
+            if (TileUnder == null) {
+                game.rootScene.removeChild(this);
+            }
             if (TileUnder != this.LastTile) {
                 this.LastTile = TileUnder;
                 this.destination = [
@@ -354,7 +385,15 @@ Tile = Class.create(Sprite, {
                 }
             }
             if (this.intersect(player)) {
-                player.onBlock = this;
+                var found = false;
+                for (var i = 0; i < player.onBlock.length; i++) {
+                    if (player.onBlock[i] == this) {
+                        found = true;
+                    }
+                }
+                if (!found) {
+                    player.onBlock.push(this);
+                }
             }
             break;
         case 'B':
@@ -386,7 +425,7 @@ Player = Class.create(Sprite, {
         this.frame = 0;
         this.health = 4;
         this.lastDirection = [0,0];
-        this.onBlock = null;
+        this.onBlock = [];
         this.isHolding = null;
         //03 Bind Keys
         game.keybind(65, 'left');
@@ -407,7 +446,7 @@ Player = Class.create(Sprite, {
         case 'D':
         case 'L':
         case 'R':
-            if (this.onBlock == null) {
+            if (this.onBlock.length == 0) {
                 if (this.isHolding == null) {
                     LoadLevel(curLevel);
                     return true;
@@ -476,17 +515,30 @@ Player = Class.create(Sprite, {
         blackOut.x = this.x - 320;
         blackOut.y = this.y - 160;
 
-
-        if (this.onBlock != null) {
-            this.x += this.onBlock.dx;
-            this.y += this.onBlock.dy;
+        var blockDx = 0;
+        var blockDy = 0;
+        var nextBlocks = [];
+        for (var i = 0; i < this.onBlock.length; i++) {
+            if (Math.abs(this.onBlock[i].x - this.x) > 16 || Math.abs(this.onBlock[i].y - this.y) > 16) {
+                continue;
+            }
+            nextBlocks.push(this.onBlock[i]);
+            blockDx += this.onBlock[i].dx;
+            blockDy += this.onBlock[i].dy;
+        }
+        this.onBlock = nextBlocks;
+        
+        if (this.onBlock.length > 0) {
+            if (this.onBlock.length >= 2) {
+                console.log("Halp");
+            }
+            blockDx /= this.onBlock.length;
+            blockDy /= this.onBlock.length;
+            this.x += blockDx;
+            this.y += blockDy;
         }
         
         this.checkBlocks();
-
-        if (this.onBlock == null || Math.abs(this.onBlock.x - this.x) > 16 || Math.abs(this.onBlock.y - this.y) > 16) {
-            this.onBlock = null;
-        }
 
         if (this.isHolding != null) {
             this.isHolding.x = this.x;
@@ -524,6 +576,9 @@ window.onload = function() {
         LoadLevel(curLevel);
 
         game.rootScene.addEventListener('enterframe', function() {
+            for (var i = 0; i < platformTimers.length; i++) {
+                platformTimers[i]();
+            }
         });
     }
     game.start(); //Begin the game
