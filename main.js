@@ -142,6 +142,51 @@ function LoadLevel(level) {
         player.x = 0*16;
         player.y = 9*16;
         break;
+    case 8: //Level 9
+        map.push("----GGGG-D----GG----");
+        map.push("----B----D----GG----");
+        map.push("----B----D----GG----");
+        map.push("----RRRRDD----GG----");
+        map.push("----U---DD----GG----");
+        map.push("----U---DD----GG----");
+        map.push("----ULLLLD----------");
+        map.push("----GG---D---G------");
+        map.push("----GG---D---BG-----");
+        map.push("----GG---DGGGGG-----");
+        map.push([15,0]);
+        player.x = 4*16;
+        player.y = 9*16;
+        break;
+    case 9: //Level 10
+        map.push("GGGGGGGGGGGGGGGGGGGG");
+        map.push("RRRRRRRRRRRRRRRRRRRR");
+        map.push("LLLLLLLLLLLLLLLLLLLL");
+        map.push("--------BBBBBBBBBBBB");
+        map.push("--------G-----------");
+        map.push("GG------G-----------");
+        map.push("RRRRRRRRRRRRRRRRRRRR");
+        map.push("GGGG----G-----------");
+        map.push("GGGG----G-----------");
+        map.push("GGGGBGGBBGG---------");
+        map.push([19,0]);
+        player.x = 0*16;
+        player.y = 9*16;
+        break;
+    case 10: //Level 11
+        map.push("--D--GGG-G-GGGRRRRRD");
+        map.push("GGDG---RD-----U----D");
+        map.push("--DB---UD-----ULLLLL");
+        map.push("--DB---UD-----------");
+        map.push("--DB---UD-----------");
+        map.push("--DB---UD-----------");
+        map.push("--DB---UD-----------");
+        map.push("--DB---UL-----------");
+        map.push("GGDB-GGGGG----------");
+        map.push("GGDG-G--------------");
+        map.push([19,0]);
+        player.x = 0*16;
+        player.y = 9*16;
+        break;
     }
     for (var i = 0; i < 10; i++) {
         var row = [];
