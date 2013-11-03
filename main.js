@@ -161,16 +161,16 @@ function LoadLevel(level) {
         map.push("GGGGGGGGGGGGGGGGGGGG");
         map.push("GGGGGGGGGGGGGGGGGGGG");
         map.push("GGGGGGGGGGGGGGGGGGGG");
-        map.push("--------GGGG--------");
+        map.push("GGGGGGGGGGGGGGGGGGGG");
         map.push("--------------------");
-        map.push("--------GGGG--------");
+        map.push("GGGGGGGGGGGGGGGGGGGG");
         map.push("GGGGGGGGGGGGGGGGGGGG");
         map.push("GGGGGGGGGGGGGGGGGGGG");
         map.push("GGGGGGGGGGGGGGGGGGGG"); // Needs a water droplet on the lower half of the level somewhere.
         map.push("GGGGGGGGGGGGGGGGGGGG");
         map.push([0, 0]);
         map.push([]);
-        map.push([[9, 9]]);
+        map.push([[9, 7]]);
         player.x = 0 * 16;
         player.y = 9 * 16;
         break;
