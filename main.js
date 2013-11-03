@@ -15,6 +15,58 @@ var bgMusic = new Howl({
 
 var blackOut;
 
+function SpawnBlock(x, y, c) {
+    var tile = new Tile();
+    tile.c = c;
+    tile.x = x;
+    tile.y = y;
+    switch (c) {
+        case '-':
+            tile.image = game.assets['Lavasmall.png'];
+            break;
+        case 'G':
+            tile.image = game.assets['Walkable.png'];
+            break;
+        case 'B':
+            tile.image = game.assets['Breaking.png'];
+            break;
+        case 'U':
+            tile.image = game.assets['FlowingLava.png'];
+            break;
+        case 'D':
+            tile.image = game.assets['FlowingLava.png'];
+            tile.rotation = 180;
+            break;
+        case 'L':
+            tile.image = game.assets['FlowingLava.png'];
+            tile.rotation = 270;
+            break;
+        case 'R':
+            tile.image = game.assets['FlowingLava.png'];
+            tile.rotation = 90;
+            break;
+        case 'M':
+            tile.image = game.assets['MovingBlock.png'];
+            break;
+        case 'g':
+            tile.image = game.assets['icon0.png'];
+            tile.frame = 10;
+            break;
+        case 'W':
+            tile.image = game.assets['WaterDrop.png'];
+            break;
+    }
+    tiles.push(tile);
+    game.rootScene.addChild(tile);
+    return tile;
+}
+
+function LavaSpawnClosure(x, y, t) {
+    var closure = function() {
+    };
+    closure.t = t;
+}
+
 function LoadLevel(level) {
     game.rootScene.removeChild(blackOut);
     game.rootScene.removeChild(player);
@@ -90,7 +142,7 @@ function LoadLevel(level) {
         map.push("GGGG----GGG---------");
         map.push("GGGG----------------");
         map.push([19, 0]);
-        map.push([[7, 3],[10,3]]);
+        map.push([[7, 3, 0],[10, 3, 0]]);
         map.push([]);
         player.x = 0 * 16;
         player.y = 9 * 16;
@@ -124,7 +176,7 @@ function LoadLevel(level) {
         map.push("GGGGGGGGGGGGGGGGGGGG");
         map.push("GGGGGGGGGGGGGGGGGGGG");
         map.push([19, 0]);
-        map.push([]);
+        map.push([[0, 7, 50]]);
         map.push([]);
         player.x = 0 * 16;
         player.y = 9 * 16;
@@ -218,77 +270,23 @@ function LoadLevel(level) {
     for (var i = 0; i < 10; i++) {
         var row = [];
         for (var j = 0; j < 20; j++) {
-            bg = new Tile();
-            var tile = map[i][j];
-            bg.c = tile;
-            bg.age2 = 0;
-            switch (tile) {
-                case '-':
-                    bg.image = game.assets['Lavasmall.png'];
-                    break;
-                case 'G':
-                    bg.image = game.assets['Walkable.png'];
-                    break;
-                case 'B':
-                    bg.image = game.assets['Breaking.png'];
-                    break;
-                case 'U':
-                    bg.image = game.assets['FlowingLava.png'];
-                    break;
-                case 'D':
-                    bg.image = game.assets['FlowingLava.png'];
-                    bg.rotation = 180;
-                    break;
-                case 'L':
-                    bg.image = game.assets['FlowingLava.png'];
-                    bg.rotation = 270;
-                    break;
-                case 'R':
-                    bg.image = game.assets['FlowingLava.png'];
-                    bg.rotation = 90;
-                    break;
-            }
-            bg.frame = tile;
-            game.rootScene.addChild(bg);
-            bg.x = j * 16;
-            bg.y = i * 16;
-            tiles.push(bg);
-            row.push(bg);
+            row.push(SpawnBlock(j * 16, i * 16, map[i][j]));
         }
         map[i] = row;
     }
 
     //Goal
-    bg = new Sprite(16, 16);
-    bg.image = game.assets['icon0.png'];
-    bg.frame = 10;
-    game.rootScene.addChild(bg);
-    bg.x = map[10][0] * 16;
-    bg.y = map[10][1] * 16;
-    tiles.push(bg);
+    SpawnBlock(map[10][0] * 16, map[10][1] * 16, 'g');
 
     //Moving Platforms
     for (var i = 0; i < map[11].length; i++) {
-        bg = new Tile(16, 16);
-        bg.image = game.assets['MovingBlock.png'];
-        bg.c = 'M';
-        game.rootScene.addChild(bg);
-        bg.x = map[11][i][0] * 16;
-        bg.y = map[11][i][1] * 16;
-        tiles.push(bg);
+        SpawnBlock(map[11][i][0] * 16, map[11][i][1] * 16, 'M');
     }
 
     //Water
     var waterDrops = [];
     for (var i = 0; i < map[12].length; i++) {
-        bg = new Tile(16, 16);
-        bg.image = game.assets['WaterDrop.png'];
-        bg.c = 'W';
-        game.rootScene.addChild(bg);
-        bg.x = map[12][i][0] * 16;
-        bg.y = map[12][i][1] * 16;
-        tiles.push(bg);
-        waterDrops.push(bg);
+        waterDrops.push(SpawnBlock(map[12][i][0] * 16, map[12][i][1] * 16, 'W'));
     }
     map[12] = waterDrops;
 
@@ -524,6 +522,9 @@ window.onload = function() {
 
         bgMusic.play();
         LoadLevel(curLevel);
+
+        game.rootScene.addEventListener('enterframe', function() {
+        });
     }
     game.start(); //Begin the game
 }
