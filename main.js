@@ -141,9 +141,9 @@ function LoadLevel(level) {
         player.y = 9 * 16;
         break;
     case 3: //Level 4
-        map.push("----------RRRRRDGGGG");
-        map.push("----------U----DGGGG");
-        map.push("--------GGU----D----"); // Needs moving platforms on each of the circular lava paths.
+        map.push("------BBBBRRRRRDGGGG");
+        map.push("-----GG---U----DGGGG");
+        map.push("----GG--GGU----D----"); // Needs moving platforms on each of the circular lava paths.
         map.push("--RRRRRDGGULLLLL----");
         map.push("--U----DGG---BGG----");
         map.push("--U----D-----B------");
@@ -211,7 +211,7 @@ function LoadLevel(level) {
         map.push("GGGGGGGGGGGGGGGGGGGG");
         map.push([19, 0]);
         map.push([]);
-        map.push([[2,9], [2,6], [2, 4]]);
+        map.push([[9,6], [2,6], [2, 4]]);
         player.x = 0 * 16;
         player.y = 9 * 16;
         break;
