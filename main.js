@@ -7,7 +7,6 @@ var stgHeight = 160;
 var map = [];
 var curLevel = 0;
 var tiles = [];
-var timeouts = [];
 
 var bgMusic = new Howl({
   urls: ['bgmusic.mp3'],
@@ -15,9 +14,6 @@ var bgMusic = new Howl({
 });
 
 function LoadLevel(level) {
-    for (var i = 0; i < timeouts.length; i++) {
-        clearTimeout(timeouts[i]);
-    }
     for (var i = 0; i < tiles.length; i++) {
         game.rootScene.removeChild(tiles[i]);
     }
@@ -334,6 +330,13 @@ Tile = Class.create(Sprite, {
                 player.onBlock = this;
             }
             break;
+        case 'B':
+            if (this.ttl != null && this.ttl > 0) {
+                if (--this.ttl <= 0) {
+                    this.image = game.assets['Lavasmall.png'];
+                    this.c = '-';
+                }
+            }
         }
         this.x += this.dx;
         this.y += this.dy;
@@ -376,11 +379,8 @@ Player = Class.create(Sprite, {
             return;
         case 'B':
             console.log(block.x + " " + block.y);
-            var bx = block.x, by = block.y
-            timeouts.push(setTimeout(function(bx, by) {
-                map[y][x].image = game.assets['Lavasmall.png'];
-                map[y][x].c = '-';
-            }, 1000));
+            var bx = block.x, by = block.y;
+            block.ttl = 20;
             return;
         }
 
