@@ -144,9 +144,11 @@ function LoadLevel(level) {
         break;
     }
     for (var i = 0; i < 10; i++) {
+        var row = [];
         for (var j = 0; j < 20; j++) {
             bg = new Sprite(16, 16);
             var tile = map[i][j];
+            bg.c = tile;
             switch (tile) {
                 case '-':
                     bg.image = game.assets['Lavasmall.png'];
@@ -178,7 +180,9 @@ function LoadLevel(level) {
             bg.x = j * 16;
             bg.y = i * 16;
             tiles.push(bg);
+            row.push(bg);
         }
+        map[i] = row;
     }
 
     //Goal
@@ -214,6 +218,7 @@ Player = Class.create(Sprite, {
         this.frame = 0;
         this.health = 4;
         this.lastDirection = [0,0];
+        this.onBlock = null;
         //03 Bind Keys
         game.keybind(65, 'left');
         game.keybind(68, 'right');
@@ -224,7 +229,10 @@ Player = Class.create(Sprite, {
 
     blockLogic: function(y, x) {
         block = map[y][x];
-        switch (block) {
+        if (block == null) {
+            return;
+        }
+        switch (block.c) {
         case '-':
             LoadLevel(curLevel);
             return;
@@ -232,6 +240,10 @@ Player = Class.create(Sprite, {
 
         if (map[10][0] == x && map[10][1] == y) {
             LoadLevel(++curLevel);
+        }
+        for (var i = 0; i < map[11].length; i++) {
+            if (x == map[11][0] && y == map[11][1]) {
+            }
         }
     },
 
@@ -274,6 +286,11 @@ Player = Class.create(Sprite, {
         
         this.x += this.lastDirection[0];
         this.y += this.lastDirection[1];
+
+        if (this.onBlock != null) {
+            this.x += this.onBlock.dx;
+            this.y += this.onBlock.dy;
+        }
         
         this.checkBlocks();
     }
