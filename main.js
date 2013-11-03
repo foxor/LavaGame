@@ -22,6 +22,8 @@ function LoadLevel(level) {
         game.rootScene.removeChild(tiles[i]);
     }
     player.lastDirection = [0,0];
+    player.onBlock = null;
+    player.isHolding = null;
     tiles = [];
     map = [];
     switch (level) {
@@ -37,6 +39,7 @@ function LoadLevel(level) {
         map.push("-------GGGGGGG------");
         map.push("-------GGGGGG-------");
         map.push([8, 0]);
+        map.push([]);
         map.push([]);
         player.x = 7 * 16;
         player.y = 7 * 16;
@@ -54,6 +57,7 @@ function LoadLevel(level) {
         map.push("GGGGGGGGGGGG--------");
         map.push([3, 0]);
         map.push([]);
+        map.push([]);
         player.x = 0 * 16;
         player.y = 9 * 16;
         break;
@@ -69,6 +73,7 @@ function LoadLevel(level) {
         map.push("BB------------------");
         map.push("BBBBBBBBBBBBBBBBBBBB");
         map.push([0, 0]);
+        map.push([]);
         map.push([]);
         player.x = 19 * 16;
         player.y = 9 * 16;
@@ -86,6 +91,7 @@ function LoadLevel(level) {
         map.push("GGGG----------------");
         map.push([19, 0]);
         map.push([[7, 3],[10,3]]);
+        map.push([]);
         player.x = 0 * 16;
         player.y = 9 * 16;
         break;
@@ -100,8 +106,9 @@ function LoadLevel(level) {
         map.push("GGGGGGGGGGGGGGGGGGGG");
         map.push("GGGGGGGGGGGGGGGGGGGG"); // Needs a water droplet on the lower half of the level somewhere.
         map.push("GGGGGGGGGGGGGGGGGGGG");
-        map.push([19, 0]);
+        map.push([0, 0]);
         map.push([]);
+        map.push([[9, 9]]);
         player.x = 0 * 16;
         player.y = 9 * 16;
         break;
@@ -117,6 +124,7 @@ function LoadLevel(level) {
         map.push("GGGGGGGGGGGGGGGGGGGG");
         map.push("GGGGGGGGGGGGGGGGGGGG");
         map.push([19, 0]);
+        map.push([]);
         map.push([]);
         player.x = 0 * 16;
         player.y = 9 * 16;
@@ -134,6 +142,7 @@ function LoadLevel(level) {
         map.push("GGGGGGGGGGGGGGGGGGGG");
         map.push([19, 0]);
         map.push([]);
+        map.push([]);
         player.x = 0 * 16;
         player.y = 9 * 16;
         break;
@@ -149,6 +158,7 @@ function LoadLevel(level) {
         map.push("GGGGGGUUUDDD--UGGUGG");
         map.push("GGGGGGUUUDDDGGUGGUGG"); //Needs water on the fourth to last G in this line.
         map.push([19,0]);
+        map.push([]);
         map.push([]);
         player.x = 0*16;
         player.y = 9*16;
@@ -166,6 +176,7 @@ function LoadLevel(level) {
         map.push("----GG---DGGGGG-----"); //Needs a water droplet on the first and fourth G of this line.
         map.push([15,0]);
         map.push([]);
+        map.push([]);
         player.x = 4*16;
         player.y = 9*16;
         break;
@@ -182,6 +193,7 @@ function LoadLevel(level) {
         map.push("GGGGBGGBBGG---------"); //Needs a water droplet on the 5 and 7th G of this line.
         map.push([19,0]);
         map.push([]);
+        map.push([]);
         player.x = 0*16;
         player.y = 9*16;
         break;
@@ -197,6 +209,7 @@ function LoadLevel(level) {
         map.push("GGDB-GGGGG----------"); //Needs water on the fifth G in this line.
         map.push("GGDG-G--------------"); //Needs a water droplet on the first G in this line.
         map.push([19,0]);
+        map.push([]);
         map.push([]);
         player.x = 0*16;
         player.y = 9*16;
@@ -264,6 +277,20 @@ function LoadLevel(level) {
         bg.y = map[11][i][1] * 16;
         tiles.push(bg);
     }
+
+    //Water
+    var waterDrops = [];
+    for (var i = 0; i < map[12].length; i++) {
+        bg = new Tile(16, 16);
+        bg.image = game.assets['WaterDrop.png'];
+        bg.c = 'W';
+        game.rootScene.addChild(bg);
+        bg.x = map[12][i][0] * 16;
+        bg.y = map[12][i][1] * 16;
+        tiles.push(bg);
+        waterDrops.push(bg);
+    }
+    map[12] = waterDrops;
 
     game.rootScene.addChild(player);
     game.rootScene.addChild(blackOut);
@@ -341,6 +368,12 @@ Tile = Class.create(Sprite, {
                     this.c = '-';
                 }
             }
+            break;
+        case 'W':
+            if (this.intersect(player)) {
+                player.isHolding = this;
+            }
+            break;
         }
         this.x += this.dx;
         this.y += this.dy;
@@ -358,6 +391,7 @@ Player = Class.create(Sprite, {
         this.health = 4;
         this.lastDirection = [0,0];
         this.onBlock = null;
+        this.isHolding = null;
         //03 Bind Keys
         game.keybind(65, 'left');
         game.keybind(68, 'right');
@@ -378,11 +412,18 @@ Player = Class.create(Sprite, {
         case 'L':
         case 'R':
             if (this.onBlock == null) {
-                LoadLevel(curLevel);
+                if (this.isHolding == null) {
+                    LoadLevel(curLevel);
+                }
+                else {
+                    block.c = 'G';
+                    block.image = game.assets['Walkable.png'];
+                    game.rootScene.removeChild(this.isHolding);
+                    this.isHolding = null;
+                }
             }
             return;
         case 'B':
-            console.log(block.x + " " + block.y);
             var bx = block.x, by = block.y;
             if (block.ttl == null) {
                 block.ttl = 20;
@@ -392,10 +433,6 @@ Player = Class.create(Sprite, {
 
         if (map[10][0] == x && map[10][1] == y) {
             LoadLevel(++curLevel);
-        }
-        for (var i = 0; i < map[11].length; i++) {
-            if (x == map[11][0] && y == map[11][1]) {
-            }
         }
     },
 
@@ -441,6 +478,7 @@ Player = Class.create(Sprite, {
         blackOut.x = this.x - 320;
         blackOut.y = this.y - 160;
 
+
         if (this.onBlock != null) {
             this.x += this.onBlock.dx;
             this.y += this.onBlock.dy;
@@ -450,6 +488,11 @@ Player = Class.create(Sprite, {
 
         if (this.onBlock == null || Math.abs(this.onBlock.x - this.x) > 16 || Math.abs(this.onBlock.y - this.y) > 16) {
             this.onBlock = null;
+        }
+
+        if (this.isHolding != null) {
+            this.isHolding.x = this.x;
+            this.isHolding.y = this.y - 16;
         }
     }
 });
@@ -469,30 +512,18 @@ window.onload = function() {
         'Breaking.png',
         'FlowingLava.png',
         'MovingBlock.png',
-        'blackout.png'
+        'blackout.png',
+        'WaterDrop.png'
     );
 
     game.onload = function() { //Prepares the game
         player = new Player();
+
         blackOut = new Sprite(640, 320);
         blackOut.image = game.assets['blackout.png'];
+
         bgMusic.play();
         LoadLevel(curLevel);
-        //05 Add Gem
-        
-        //06 Create Label
-        
-        //08 Health Label
-        
-        //04 Touch Listener
-        
-        //Game Condition Check
-        game.rootScene.addEventListener('enterframe', function() {
-            //08 Game Over
-            
-            //08 Make Bomb Generator
-        });
-
     }
     game.start(); //Begin the game
 }
