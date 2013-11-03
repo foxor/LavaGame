@@ -380,7 +380,9 @@ Player = Class.create(Sprite, {
         case 'B':
             console.log(block.x + " " + block.y);
             var bx = block.x, by = block.y;
-            block.ttl = 20;
+            if (block.ttl == null) {
+                block.ttl = 20;
+            }
             return;
         }
 
