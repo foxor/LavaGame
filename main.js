@@ -27,7 +27,7 @@ function LoadLevel(level) {
         map.push("-------GGGGGGG------");
         map.push("-------GGGGGG-------");
         map.push([8, 0]);
-        map.push([[4, 0]]);
+        map.push([]);
         player.x = 7 * 16;
         player.y = 7 * 16;
         break;
@@ -58,9 +58,9 @@ function LoadLevel(level) {
         map.push("BBBBBBBBBBBBBBBBBBBB");
         map.push("BBBBBBBBBBBBBBBBBBBB");
         map.push("BBBBBBBBBBBBBBBBBBBB");
-        map.push([19, 0]);
+        map.push([0, 0]);
         map.push([]);
-        player.x = 0 * 16;
+        player.x = 19 * 16;
         player.y = 9 * 16;
         break;
     case 3: //Level 4
@@ -75,7 +75,7 @@ function LoadLevel(level) {
         map.push("GGGG----------------");
         map.push("GGGG----------------");
         map.push([19, 0]);
-        map.push([]);
+        map.push([7, 3]);
         player.x = 0 * 16;
         player.y = 9 * 16;
         break;
@@ -191,7 +191,7 @@ function LoadLevel(level) {
     for (var i = 0; i < 10; i++) {
         var row = [];
         for (var j = 0; j < 20; j++) {
-            bg = new Sprite(16, 16);
+            bg = new Tile();
             var tile = map[i][j];
             bg.c = tile;
             switch (tile) {
@@ -243,6 +243,7 @@ function LoadLevel(level) {
     for (var i = 0; i < map[11].length; i++) {
         bg = new Sprite(16, 16);
         bg.image = game.assets['MovingBlock.png'];
+        bg.c = 'M';
         game.rootScene.addChild(bg);
         bg.x = map[11][0] * 16;
         bg.y = map[11][1] * 16;
@@ -252,6 +253,45 @@ function LoadLevel(level) {
     game.rootScene.removeChild(player);
     game.rootScene.addChild(player);
 }
+
+Tile = Class.create(Sprite, {
+    initialize: function() {
+        Sprite.call(this, 16, 16);
+        this.LastTile = null;
+        this.dx = 0;
+        this.dy = 0;
+    },
+
+    onenterframe: function() {
+        switch (this.c) {
+        case 'M':
+            var TileUnder = map[Math.floor((this.x + 8) / 16)][Math.floor((this.y + 8) / 16)];
+            if (TileUnder != this.LastTile) {
+                switch (TileUnder.c) {
+                case 'U':
+                    this.dx = 0;
+                    this.dy = -moveSpeed;
+                    break;
+                case 'D':
+                    this.dx = 0;
+                    this.dy = moveSpeed;
+                    break;
+                case 'L':
+                    this.dx = -moveSpeed;
+                    this.dy = 0;
+                    break;
+                case 'R':
+                    this.dx = moveSpeed;
+                    this.dy = 0;
+                    break;
+                }
+            }
+            break;
+        }
+        this.x += this.dx;
+        this.y += this.dy;
+    }
+});
 
 //02 Player Class
 Player = Class.create(Sprite, {
@@ -273,10 +313,10 @@ Player = Class.create(Sprite, {
     },
 
     blockLogic: function(y, x) {
-        block = map[y][x];
-        if (block == null) {
+        if (map[y] == null || map[y][x] == null) {
             return;
         }
+        block = map[y][x];
         switch (block.c) {
         case '-':
             LoadLevel(curLevel);
