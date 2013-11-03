@@ -5,7 +5,7 @@ var health = 5;
 var stgWidth = 320;
 var stgHeight = 160;
 var map = [];
-var curLevel = 0;
+var curLevel = 7;
 var tiles = [];
 var platformTimers = [];
 
@@ -221,14 +221,21 @@ function LoadLevel(level) {
         map.push("------UUUDDD--UGGUGG"); //and on the first 3 D-flowing-lava-lines.
         map.push("------UUUDDD--UGGUGG");
         map.push("------UUUDDD--UGGUGG");
-        map.push("------UUUDDDGGUGGUGG");
-        map.push("------UUUDDD--UGGUGG"); //Needs water on the first G in this line.
+        map.push("------UUUDDDGGUGGUGG"); //Needs water on the first G in this line.
+        map.push("------UUUDDD--UGGUGG"); 
         map.push("GGGGGGUUUDDD--UGGUGG");
         map.push("GGGGGGUUUDDD--UGGUGG");
         map.push("GGGGGGUUUDDDGGUGGUGG"); //Needs water on the fourth to last G in this line.
         map.push([19,0]);
-        map.push([]);
-        map.push([]);
+        map.push([
+            [6, 9, 40, 0], 
+            [7, 9, 40, 0],
+            [8, 9, 40, 0],
+            [9, 0, 40, 0],
+            [10, 0, 40, 0],
+            [11, 0, 40, 0]
+        ]);
+        map.push([[13, 5], [15, 9]]);
         player.x = 0*16;
         player.y = 9*16;
         break;
@@ -334,10 +341,13 @@ Tile = Class.create(Sprite, {
     onenterframe: function() {
         switch (this.c) {
         case 'M':
-            var TileUnder = map[Math.floor((this.y + 8) / 16)][Math.floor((this.x + 8) / 16)];
-            if (TileUnder == null) {
+            var xPos = Math.floor((this.x + 8) / 16);
+            var yPos = Math.floor((this.y + 8) / 16);
+            if (map[yPos] == null || map[yPos][xPos] == null) {
                 game.rootScene.removeChild(this);
+                break;
             }
+            var TileUnder = map[Math.floor((this.y + 8) / 16)][Math.floor((this.x + 8) / 16)];
             if (TileUnder != this.LastTile) {
                 this.LastTile = TileUnder;
                 this.destination = [
@@ -474,10 +484,19 @@ Player = Class.create(Sprite, {
     },
 
     checkBlocks: function() {
-        var minX = Math.floor(this.x / 16);
-        var minY = Math.floor((this.y + 5) / 16);
-        var maxX = Math.floor((this.x + 7) / 16);
-        var maxY = Math.floor((this.y + 12) / 16);
+        var minX, maxX, minY, maxY;
+        if (this.frame == 0) {
+            minX = Math.floor(this.x / 16);
+            minY = Math.floor((this.y + 5) / 16);
+            maxX = Math.floor((this.x + 7) / 16);
+            maxY = Math.floor((this.y + 12) / 16);
+        }
+        else {
+            minX = Math.floor(this.x + 5 / 16);
+            minY = Math.floor((this.y + 5) / 16);
+            maxX = Math.floor((this.x + 12) / 16);
+            maxY = Math.floor((this.y + 12) / 16);
+        }
         if (this.blockLogic(minY, minX)) return;
         if (this.blockLogic(minY, maxX)) return;
         if (this.blockLogic(maxY, minX)) return;
