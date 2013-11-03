@@ -7,8 +7,12 @@ var stgHeight = 160;
 var map = [];
 var curLevel = 0;
 var tiles = [];
+var timeouts = [];
 
 function LoadLevel(level) {
+    for (var i = 0; i < timeouts.length; i++) {
+        clearTimeout(timeouts[i]);
+    }
     for (var i = 0; i < tiles.length; i++) {
         game.rootScene.removeChild(tiles[i]);
     }
@@ -194,6 +198,7 @@ function LoadLevel(level) {
             bg = new Sprite(16, 16);
             var tile = map[i][j];
             bg.c = tile;
+            bg.age2 = 0;
             switch (tile) {
                 case '-':
                     bg.image = game.assets['Lavasmall.png'];
@@ -280,6 +285,14 @@ Player = Class.create(Sprite, {
         switch (block.c) {
         case '-':
             LoadLevel(curLevel);
+            return;
+        case 'B':
+            console.log(block.x + " " + block.y);
+            var bx = block.x, by = block.y
+            timeouts.push(setTimeout(function(bx, by) {
+                map[y][x].image = game.assets['Lavasmall.png'];
+                map[y][x].c = '-';
+            }, 1000));
             return;
         }
 
