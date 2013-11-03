@@ -9,6 +9,11 @@ var curLevel = 0;
 var tiles = [];
 var timeouts = [];
 
+var bgMusic = new Howl({
+  urls: ['bgmusic.mp3'],
+  loop: true
+});
+
 function LoadLevel(level) {
     for (var i = 0; i < timeouts.length; i++) {
         clearTimeout(timeouts[i]);
@@ -417,6 +422,7 @@ window.onload = function() {
 
     game.onload = function() { //Prepares the game
         player = new Player();
+        bgMusic.play();
         LoadLevel(curLevel);
         game.rootScene.addChild(player);
         //05 Add Gem
