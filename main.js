@@ -6,9 +6,13 @@ var stgWidth = 320;
 var stgHeight = 160;
 var map = [];
 var curLevel = 0;
+var tiles = [];
 
 function LoadLevel(level) {
-    console.log(level);
+    for (var i = 0; i < tiles.length; i++) {
+        game.rootScene.removeChild(tiles[i]);
+    }
+    tiles = [];
     map = [];
     switch (level) {
     case 0: //Level 1
@@ -23,6 +27,7 @@ function LoadLevel(level) {
         map.push("-------GGGGGGG------");
         map.push("-------GGGGGG-------");
         map.push([8, 0]);
+        map.push([[4, 0]]);
         player.x = 7 * 16;
         player.y = 7 * 16;
         break;
@@ -38,6 +43,7 @@ function LoadLevel(level) {
         map.push("GGGGGGGGGGGG--------");
         map.push("GGGGGGGGGGGG--------");
         map.push([0, 0]);
+        map.push([]);
         player.x = 0 * 16;
         player.y = 9 * 16;
         break;
@@ -52,7 +58,8 @@ function LoadLevel(level) {
         map.push("BBBBBBBBBBBBBBBBBBBB");
         map.push("BBBBBBBBBBBBBBBBBBBB");
         map.push("BBBBBBBBBBBBBBBBBBBB");
-        map.push([9, 0]);
+        map.push([19, 0]);
+        map.push([]);
         player.x = 0 * 16;
         player.y = 9 * 16;
         break;
@@ -67,7 +74,8 @@ function LoadLevel(level) {
         map.push("--ULLLLL------------");
         map.push("GGGG----------------");
         map.push("GGGG----------------");
-        map.push([9, 0]);
+        map.push([19, 0]);
+        map.push([]);
         player.x = 0 * 16;
         player.y = 9 * 16;
         break;
@@ -82,7 +90,8 @@ function LoadLevel(level) {
         map.push("GGGGGGGGGGGGGGGGGGGG");
         map.push("GGGGGGGGGGGGGGGGGGGG");
         map.push("GGGGGGGGGGGGGGGGGGGG");
-        map.push([9, 0]);
+        map.push([19, 0]);
+        map.push([]);
         player.x = 0 * 16;
         player.y = 9 * 16;
         break;
@@ -97,7 +106,8 @@ function LoadLevel(level) {
         map.push("RRRRRRRRRRRRRRRRRRRR");
         map.push("GGGGGGGGGGGGGGGGGGGG");
         map.push("GGGGGGGGGGGGGGGGGGGG");
-        map.push([9, 0]);
+        map.push([19, 0]);
+        map.push([]);
         player.x = 0 * 16;
         player.y = 9 * 16;
         break;
@@ -112,9 +122,25 @@ function LoadLevel(level) {
         map.push("LLLLLLLLLLLLLLLLLLLL");
         map.push("GGGGGGGGGGGGGGGGGGGG");
         map.push("GGGGGGGGGGGGGGGGGGGG");
-        map.push([9, 0]);
+        map.push([19, 0]);
+        map.push([]);
         player.x = 0 * 16;
         player.y = 9 * 16;
+        break;
+    case 7: //Level 8 
+        map.push("------UUUDDD--UGGUGG");
+        map.push("------UUUDDD--UGGUGG");
+        map.push("------UUUDDD--UGGUGG");
+        map.push("------UUUDDD--UGGUGG");
+        map.push("------UUUDDD--UGGUGG");
+        map.push("------UUUDDDGGUGGUGG");
+        map.push("------UUUDDD--UGGUGG");
+        map.push("GGGGGGUUUDDD--UGGUGG");
+        map.push("GGGGGGUUUDDD--UGGUGG");
+        map.push("GGGGGGUUUDDDGGUGGUGG");
+        map.push([19,0]);
+        player.x = 0*16;
+        player.y = 9*16;
         break;
     }
     for (var i = 0; i < 10; i++) {
@@ -130,28 +156,51 @@ function LoadLevel(level) {
                     break;
                 case 'B':
                     bg.image = game.assets['Breaking.png'];
+                    break;
                 case 'U':
-                    //bg.image = game.assets[''];
+                    bg.image = game.assets['FlowingLava.png'];
+                    break;
                 case 'D':
-                    //bg.image = game.assets[''];
+                    bg.image = game.assets['FlowingLava.png'];
+                    bg.rotation = 180;
+                    break;
                 case 'L':
-                    //bg.image = game.assets[''];
+                    bg.image = game.assets['FlowingLava.png'];
+                    bg.rotation = 270;
+                    break;
                 case 'R':
-                    //bg.image = game.assets[''];
+                    bg.image = game.assets['FlowingLava.png'];
+                    bg.rotation = 90;
+                    break;
             }
             map[i][j].age = 1;
             bg.frame = tile;
             game.rootScene.addChild(bg);
             bg.x = j * 16;
             bg.y = i * 16;
+            tiles.push(bg);
         }
     }
+
+    //Goal
     bg = new Sprite(16, 16);
     bg.image = game.assets['icon0.png'];
     bg.frame = 10;
     game.rootScene.addChild(bg);
     bg.x = map[10][0] * 16;
     bg.y = map[10][1] * 16;
+    tiles.push(bg);
+
+    //Moving Platforms
+    for (var i = 0; i < map[11].length; i++) {
+        bg = new Sprite(16, 16);
+        bg.image = game.assets['MovingBlock.png'];
+        game.rootScene.addChild(bg);
+        bg.x = map[11][0] * 16;
+        bg.y = map[11][1] * 16;
+        tiles.push(bg);
+    }
+
     game.rootScene.removeChild(player);
     game.rootScene.addChild(player);
 }
@@ -264,7 +313,17 @@ window.onload = function() {
     game = new Game(stgWidth, stgHeight);
     //Preload images
     //Any resources not preloaded will not appear
-    game.preload('Character.png', 'diamond-sheet.png', 'bg.png', 'Lavasmall.png', 'Walkable.png', 'icon0.png', 'Breaking.png');
+    game.preload(
+        'Character.png',
+        'diamond-sheet.png',
+        'bg.png',
+        'Lavasmall.png',
+        'Walkable.png',
+        'icon0.png',
+        'Breaking.png',
+        'FlowingLava.png',
+        'MovingBlock.png'
+    );
 
     game.onload = function() { //Prepares the game
         player = new Player();
