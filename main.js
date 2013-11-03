@@ -173,6 +173,7 @@ function LoadLevel(level) {
                     bg.rotation = 90;
                     break;
             }
+            map[i][j].age = 1;
             bg.frame = tile;
             game.rootScene.addChild(bg);
             bg.x = j * 16;
