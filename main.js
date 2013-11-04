@@ -213,7 +213,7 @@ function LoadLevel(level) {
         map.push("------UUUDDDGG----GG");
         map.push("------UUUDDDGG----GG"); //Needs water on the first G in this line.
         map.push("------UUUDDDGG----GG"); 
-        map.push("GGGGGGUUUDDDGG----GG");
+        map.push("GGGGGGUUUDDD------GG");
         map.push("GGGGGGUUUDDD---GG-GG");
         map.push("GGGGGGUUUDDDGG-GG-GG"); //Needs water on the fourth to last G in this line.
         map.push([19,0]);
