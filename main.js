@@ -201,16 +201,16 @@ function LoadLevel(level) {
         player.y = 9 * 16;
         break;
     case 6: //Level 7
-        map.push("------UUUDDD--U--UGG");
-        map.push("------UUUDDD--U--UGG"); //Needs moving platforms on the first 3 U-flowing-lava-lines 
-        map.push("------UUUDDD--U--UGG"); //and on the first 3 D-flowing-lava-lines.
-        map.push("------UUUDDDGGU--UGG");
-        map.push("------UUUDDDGGU--UGG");
-        map.push("------UUUDDDGGU--UGG"); //Needs water on the first G in this line.
-        map.push("------UUUDDDGGU--UGG"); 
-        map.push("GGGGGGUUUDDDGGU--UGG");
-        map.push("GGGGGGUUUDDD--UGGUGG");
-        map.push("GGGGGGUUUDDDGGUGGUGG"); //Needs water on the fourth to last G in this line.
+        map.push("------UUUDDD------GG");
+        map.push("------UUUDDD------GG"); //Needs moving platforms on the first 3 U-flowing-lava-lines 
+        map.push("------UUUDDD------GG"); //and on the first 3 D-flowing-lava-lines.
+        map.push("------UUUDDDGG----GG");
+        map.push("------UUUDDDGG----GG");
+        map.push("------UUUDDDGG----GG"); //Needs water on the first G in this line.
+        map.push("------UUUDDDGG----GG"); 
+        map.push("GGGGGGUUUDDDGG----GG");
+        map.push("GGGGGGUUUDDD---GG-GG");
+        map.push("GGGGGGUUUDDDGG-GG-GG"); //Needs water on the fourth to last G in this line.
         map.push([19,0]);
         map.push([
             [6, 9, 40, 0], 
