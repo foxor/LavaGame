@@ -293,8 +293,12 @@ function LoadLevel(level) {
         map.push("GGDB-GGGGG----------"); //Needs water on the fifth G in this line.
         map.push("GGDG-G--------------"); //Needs a water droplet on the first G in this line.
         map.push([19,0]);
-        map.push([]);
-        map.push([]);
+        map.push([
+        	[2,0,60,-60],
+        	[14,0,60,-60],
+        	[7,1,60,-60]
+        	]);
+        map.push([5,0],[4,8],[0,9]);
         player.x = 0*16;
         player.y = 9*16;
         break;
