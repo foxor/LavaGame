@@ -5,7 +5,7 @@ var health = 5;
 var stgWidth = 320;
 var stgHeight = 160;
 var map = [];
-var curLevel = 0;
+var curLevel = 8;
 var tiles = [];
 var platformTimers = [];
 var globalTimer = 0;
@@ -267,7 +267,7 @@ function LoadLevel(level) {
         map.push([
         	[2,0,60,-60],
         	[14,0,0,-60],
-        	[7,2,0,-60]
+        	[8,2,0,-60]
         	]);
         map.push([[0,3],[7,8],[0,8]]);
         player.x = 0*16;
