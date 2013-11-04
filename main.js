@@ -5,7 +5,7 @@ var health = 5;
 var stgWidth = 320;
 var stgHeight = 160;
 var map = [];
-var curLevel = 9;
+var curLevel = 0;
 var tiles = [];
 var platformTimers = [];
 var globalTimer = 0;
@@ -207,8 +207,8 @@ function LoadLevel(level) {
         map.push("------UUUDDD--U--UGG");
         map.push("------UUUDDD--U--UGG");
         map.push("------UUUDDDGGU--UGG"); //Needs water on the first G in this line.
-        map.push("------UUUDDD--U--UGG"); 
-        map.push("GGGGGGUUUDDD--U--UGG");
+        map.push("------UUUDDDGGU--UGG"); 
+        map.push("GGGGGGUUUDDDGGU--UGG");
         map.push("GGGGGGUUUDDD--UGGUGG");
         map.push("GGGGGGUUUDDDGGUGGUGG"); //Needs water on the fourth to last G in this line.
         map.push([19,0]);
