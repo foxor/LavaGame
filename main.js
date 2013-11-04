@@ -5,10 +5,11 @@ var health = 5;
 var stgWidth = 320;
 var stgHeight = 160;
 var map = [];
-var curLevel = 8;
+var curLevel = 0;
 var tiles = [];
 var platformTimers = [];
 var globalTimer = 0;
+var credits = null;
 
 var taunts = [
     new Howl({urls: ["taunt1.wav"], loop: false}),
@@ -92,6 +93,14 @@ function LoadLevel(level) {
     game.rootScene.removeChild(player);
     for (var i = 0; i < tiles.length; i++) {
         game.rootScene.removeChild(tiles[i]);
+    }
+    if (level >= 10) {
+        credits = new Sprite(320, 1000);
+        credits.image = game.assets['credits.png'];
+        credits.x = 0;
+        credits.y = 0;
+        game.rootScene.addChild(credits);
+        return;
     }
     player.lastDirection = [0,0];
     player.onBlock = [];
@@ -492,7 +501,7 @@ Player = Class.create(Sprite, {
         }
 
         if (map[10][0] == x && map[10][1] == y) {
-            taunts[Math.floor(Math.random() * 6 - 0.001)].play();
+            taunts[Math.floor(Math.random() * 5 - 0.001)].play();
             LoadLevel(++curLevel);
             return true;
         }
@@ -599,7 +608,8 @@ window.onload = function() {
         'WaterDrop.png',
         'WaterSwirl0.png',
         'Breakingactive.png',
-	'Ladder.png'
+	'Ladder.png',
+        'credits.png'
     );
 
     game.onload = function() { //Prepares the game
@@ -614,6 +624,13 @@ window.onload = function() {
         game.rootScene.addEventListener('enterframe', function() {
             for (var i = 0; i < platformTimers.length; i++) {
                 platformTimers[i]();
+            }
+
+            if (credits != null) {
+                credits.y -= 2;
+                if (credits.y < -1000 - stgHeight) {
+                    credits.y = stgHeight;
+                }
             }
 
             globalTimer++;
