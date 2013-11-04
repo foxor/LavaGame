@@ -262,22 +262,22 @@ function LoadLevel(level) {
         player.y = 9*16;
         break;
     case 9: //Level 10
-        map.push("RRRRRRRRD----GGGGGGG");
-        map.push("GG------D----GGGGGGG"); //Needs a water droplet on both G's on this line.
-        map.push("GG------D-----------"); //Needs a water droplet on the first G of this line.
-        map.push("--------DGG---------");
-        map.push("-------GDGG---------");
-        map.push("G------BD-DLLGG-----"); //Needs a water droplet on the first and third G of this line.
-        map.push("BBGG---BD-D-UGG-----");
-        map.push("GGGG--GGD-D-U-------"); 
-        map.push("GGGG--GGD-D-U-------"); //Needs a water droplet on the 5th and 6th G on this line.
-        map.push("GGGGBGBBD-RRU-------"); //Needs a water droplet on the 5th G of this line.
+        map.push("RRRRRRRRD---------GG");
+        map.push("GGGGG---D---------GG"); //Needs a water droplet on both G's on this line.
+        map.push("GGGGG---D-----------"); //Needs a water droplet on the first G of this line.
+        map.push("--------D--DRRGGG---");
+        map.push("--------DGGD-UGGG---");
+        map.push("G-------DGGLLUGGG---"); //Needs a water droplet on the first and third G of this line.
+        map.push("BBGG----D-----------");
+        map.push("GGGG--GGD-----------"); 
+        map.push("GGGG--GGD-----------"); //Needs a water droplet on the 5th and 6th G on this line.
+        map.push("GGGGBGBBD-----------"); //Needs a water droplet on the 5th G of this line.
         map.push([19,0]);
         map.push([
           [0,0,60,-60],
-          [11,5,0,-60]
+          [11,3,0,-60]
           ]);
-        map.push([[0,1],[1,1],[0,2],[0,5],[9,4],[6,8],[7,8],[5,9]]);
+        map.push([[4,1],[4,2],[3,2],[0,5],[10,4],[6,7],[7,7],[5,9]]);
         player.x = 0*16;
         player.y = 9*16;
         break;
