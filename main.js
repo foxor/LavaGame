@@ -265,7 +265,7 @@ function LoadLevel(level) {
         player.y = 9*16;
         break;
     case 9: //Level 10
-        map.push("--D--GGG-G-GGGRRRRRD"); //Needs a moving platform on the D-flowing lava line (starts at [2,0])
+        map.push("--DG--GG-G-GGGRRRRRD"); //Needs a moving platform on the D-flowing lava line (starts at [2,0])
         map.push("GGDG--GRD-----U----D"); //Needs a water droplet on the first G in this line.
         map.push("--DB--GUD-----ULLLLL");
         map.push("--DB---UD-----------");
