@@ -11,7 +11,7 @@ var platformTimers = [];
 var globalTimer = 0;
 
 var bgMusic = new Howl({
-  urls: ['bgmusic.mp3'],
+  urls: ['GameMusic.mp3'],
   loop: true
 });
 
