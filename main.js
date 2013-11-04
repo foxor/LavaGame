@@ -245,6 +245,27 @@ function LoadLevel(level) {
         player.y = 9*16;
         break;
     case 8: //Level 9
+        map.push("--DG--GG-G-GGGRRRDGG"); //Needs a moving platform on the D-flowing lava line (starts at [2,0])
+        map.push("--DG--GRD-----U--DGG"); //Needs a water droplet on the first G in this line.
+        map.push("--DG--GUD-----ULLLGG");
+        map.push("GGDB---UD-----------");
+        map.push("--DB---UD-----------"); //Needs a moving platform on the circular flowing lava spiral at the end
+        map.push("--DB---UD-----------"); // and the circular flowing lava spiral in the middle of the level.
+        map.push("--DB---UD-----------");
+        map.push("--DB---UL-----------");
+        map.push("GGDB-GGGGG----------"); //Needs water on the fifth G in this line.
+        map.push("GGDG-G--------------"); //Needs a water droplet on the first G in this line.
+        map.push([19,0]);
+        map.push([
+        	[2,0,60,-60],
+        	[14,0,0,-60],
+        	[7,1,0,-60]
+        	]);
+        map.push([[0,3],[7,8],[0,8]]);
+        player.x = 0*16;
+        player.y = 9*16;
+        break;
+    case 9: //Level 10
         map.push("RRRRRRRRD---------GG");
         map.push("GGGGG---D---------GG"); //Needs a water droplet on both G's on this line.
         map.push("GGGGG---D-----------"); //Needs a water droplet on the first G of this line.
@@ -261,27 +282,6 @@ function LoadLevel(level) {
           [11,3,0,-60]
           ]);
         map.push([[4,1],[4,2],[3,2],[0,5],[10,4],[6,7],[7,7],[5,9]]);
-        player.x = 0*16;
-        player.y = 9*16;
-        break;
-    case 9: //Level 10
-        map.push("--DG--GG-G-GGGRRRRRD"); //Needs a moving platform on the D-flowing lava line (starts at [2,0])
-        map.push("--DG--GRD-----U----D"); //Needs a water droplet on the first G in this line.
-        map.push("--DG--GUD-----ULLLLL");
-        map.push("GGDB---UD-----------");
-        map.push("--DB---UD-----------"); //Needs a moving platform on the circular flowing lava spiral at the end
-        map.push("--DB---UD-----------"); // and the circular flowing lava spiral in the middle of the level.
-        map.push("--DB---UD-----------");
-        map.push("--DB---UL-----------");
-        map.push("GGDB-GGGGG----------"); //Needs water on the fifth G in this line.
-        map.push("GGDG-G--------------"); //Needs a water droplet on the first G in this line.
-        map.push([19,0]);
-        map.push([
-        	[2,0,60,-60],
-        	[14,0,0,-60],
-        	[7,1,0,-60]
-        	]);
-        map.push([[0,3],[7,8],[0,8]]);
         player.x = 0*16;
         player.y = 9*16;
         break;
