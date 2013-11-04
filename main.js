@@ -408,7 +408,12 @@ Tile = Class.create(Sprite, {
             break;
         case 'B':
             if (this.ttl != null && this.ttl > 0) {
-                this.image = game.assets['Breakingactive.png'];
+                if (this.ttl > 15)
+		    this.image = game.assets['Breakingactive.png'];
+		else if (this.ttl > 10)
+		    this.image = game.assets['Breaking.png'];
+		else if (this.ttl > 7)
+		    this.image = game.assets['Breakingactive.png'];
                 if (--this.ttl <= 0) {
                     this.image = game.assets['Lavasmall.png'];
                     this.c = '-';
