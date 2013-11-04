@@ -266,8 +266,8 @@ function LoadLevel(level) {
         break;
     case 9: //Level 10
         map.push("--DG--GG-G-GGGRRRRRD"); //Needs a moving platform on the D-flowing lava line (starts at [2,0])
-        map.push("GGDG--GRD-----U----D"); //Needs a water droplet on the first G in this line.
-        map.push("--DB--GUD-----ULLLLL");
+        map.push("--DG--GRD-----U----D"); //Needs a water droplet on the first G in this line.
+        map.push("GGDG--GUD-----ULLLLL");
         map.push("--DB---UD-----------");
         map.push("--DB---UD-----------"); //Needs a moving platform on the circular flowing lava spiral at the end
         map.push("--DB---UD-----------"); // and the circular flowing lava spiral in the middle of the level.
@@ -281,7 +281,7 @@ function LoadLevel(level) {
         	[14,0,0,-60],
         	[7,1,0,-60]
         	]);
-        map.push([[0,1],[7,8],[0,8]]);
+        map.push([[0,2],[7,8],[0,8]]);
         player.x = 0*16;
         player.y = 9*16;
         break;
