@@ -281,7 +281,7 @@ function LoadLevel(level) {
         	[14,0,60,-60],
         	[7,1,60,0]
         	]);
-        map.push([5,0],[4,8],[0,8]);
+        map.push([[5,0],[4,8],[0,8]]);
         player.x = 0*16;
         player.y = 9*16;
         break;
