@@ -431,9 +431,10 @@ Tile = Class.create(Sprite, {
             }
             break;
         case 'W':
-            if (this.intersect(player)) {
+            if (this.intersect(player) && player.isHolding == null) {
                 player.isHolding = this;
                 player.isHolding.rotation = 0;
+		this.c = 'w';
             }
             break;
         }
@@ -473,8 +474,8 @@ Player = Class.create(Sprite, {
         case 'D':
         case 'L':
         case 'R':
-            if (this.onBlock.length == 0) {
-                if (this.isHolding == null) {
+            if (player.onBlock.length == 0) {
+                if (player.isHolding == null) {
                     LoadLevel(curLevel);
                     return true;
                 }
@@ -482,7 +483,8 @@ Player = Class.create(Sprite, {
                     block.c = 'G';
                     block.image = game.assets['Walkable.png'];
                     game.rootScene.removeChild(this.isHolding);
-                    this.isHolding = null;
+                    player.isHolding = null;
+		    return true;
                 }
             }
             return false;
