@@ -10,6 +10,7 @@ var tiles = [];
 var platformTimers = [];
 var globalTimer = 0;
 var credits = null;
+var creditsStarted = 0;
 
 var taunts = [
     new Howl({urls: ["taunt1.wav"], loop: false}),
@@ -18,6 +19,8 @@ var taunts = [
     new Howl({urls: ["taunt4.wav"], loop: false}),
     new Howl({urls: ["taunt5.wav"], loop: false})
 ];
+
+var creditSound = new Howl({urls: ["credits.wav"], loop: false});
 
 var bgMusic = new Howl({
   urls: ['GameMusic.mp3'],
@@ -94,12 +97,15 @@ function LoadLevel(level) {
     for (var i = 0; i < tiles.length; i++) {
         game.rootScene.removeChild(tiles[i]);
     }
-    if (level >= 10) {
+    if (level >= 10 && credits == null) {
+        bgMusic.stop();
+        creditsStarted = new Date().getTime();
         credits = new Sprite(320, 1000);
         credits.image = game.assets['credits.png'];
         credits.x = 0;
         credits.y = 0;
         game.rootScene.addChild(credits);
+        creditSound.play();
         return;
     }
     player.lastDirection = [0,0];
@@ -609,7 +615,8 @@ window.onload = function() {
         'WaterSwirl0.png',
         'Breakingactive.png',
 	'Ladder.png',
-        'credits.png'
+        'credits.png',
+        'SuccessLowRes.png'
     );
 
     game.onload = function() { //Prepares the game
@@ -627,9 +634,17 @@ window.onload = function() {
             }
 
             if (credits != null) {
-                credits.y -= 2;
-                if (credits.y < -1000 - stgHeight) {
-                    credits.y = stgHeight;
+                var now = new Date().getTime();
+                var dT = now - creditsStarted - 5750;
+                if (dT > 0) {
+                    if (dT >= 46500) {
+                        var banner = new Sprite(320, 160);
+                        banner.image = game.assets['SuccessLowRes.png'];
+                    }
+                    else {
+                        var tween = dT / 46500.0;
+                        credits.y = (-1000 - stgHeight) * tween;
+                    }
                 }
             }
 
