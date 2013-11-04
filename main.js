@@ -239,7 +239,7 @@ function LoadLevel(level) {
         map.push("----ULLLL-D---------");
         map.push("----GG----D--G------");
         map.push("----GG----D--BG-----");
-        map.push("----GG----D-GGG-----"); //Needs a water droplet on the first and fourth G of this line.
+        map.push("----GG----DGGGG-----"); //Needs a water droplet on the first and fourth G of this line.
         map.push([15,0]);
         map.push([
         	[4,3,0,-60],
