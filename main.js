@@ -96,7 +96,7 @@ function LoadLevel(level) {
     }
     if (level >= 10) {
         credits = new Sprite(320, 1000);
-        credits.image = game.assets['Credits.png'];
+        credits.image = game.assets['credits.png'];
         credits.x = 0;
         credits.y = 0;
         game.rootScene.addChild(credits);
@@ -609,7 +609,7 @@ window.onload = function() {
         'WaterSwirl0.png',
         'Breakingactive.png',
 	'Ladder.png',
-        'Credits.png'
+        'credits.png'
     );
 
     game.onload = function() { //Prepares the game
