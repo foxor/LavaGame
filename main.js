@@ -10,16 +10,13 @@ var tiles = [];
 var platformTimers = [];
 var globalTimer = 0;
 
-var taunts = new Howl({
-    urls: [
-        "taunt1.wav",
-        "taunt2.wav",
-        "taunt3.wav",
-        "taunt4.wav",
-        "taunt5.wav"
-    ],
-    loop: false
-});
+var taunts = [
+    new Howl({urls: ["taunt1.wav"], loop: false}),
+    new Howl({urls: ["taunt2.wav"], loop: false}),
+    new Howl({urls: ["taunt3.wav"], loop: false}),
+    new Howl({urls: ["taunt4.wav"], loop: false}),
+    new Howl({urls: ["taunt5.wav"], loop: false})
+];
 
 var bgMusic = new Howl({
   urls: ['GameMusic.mp3'],
@@ -495,7 +492,7 @@ Player = Class.create(Sprite, {
         }
 
         if (map[10][0] == x && map[10][1] == y) {
-            taunts.play();
+            taunts[Math.floor(Math.random() * 6 - 0.001)].play();
             LoadLevel(++curLevel);
             return true;
         }
