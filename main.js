@@ -51,7 +51,8 @@ function SpawnBlock(x, y, c) {
             tile.image = game.assets['MovingBlock.png'];
             break;
         case 'g':
-            tile.image = game.assets['icon0.png'];
+            tile.image = game.assets['Ladder.png'];
+	    tile.rotation = 180;
             tile.frame = 10;
             break;
         case 'W':
@@ -593,7 +594,8 @@ window.onload = function() {
         'blackout.png',
         'WaterDrop.png',
         'WaterSwirl0.png',
-        'Breakingactive.png'
+        'Breakingactive.png',
+	'Ladder.png'
     );
 
     game.onload = function() { //Prepares the game
