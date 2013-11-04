@@ -5,7 +5,7 @@ var health = 5;
 var stgWidth = 320;
 var stgHeight = 160;
 var map = [];
-var curLevel = 9;
+var curLevel = 0;
 var tiles = [];
 var platformTimers = [];
 var globalTimer = 0;
@@ -200,24 +200,7 @@ function LoadLevel(level) {
         player.x = 0 * 16;
         player.y = 9 * 16;
         break;
-    case 6: //Level 7 
-        map.push("GGGGGGGGGGGGGGGGGGGG");
-        map.push("GGGGGGGGGGGGGGGGGGGG");
-        map.push("GGGGGGGGGGGGGGGGGGGG"); //Needs water buckets on every line of ground between the flowing lava.
-        map.push("LLLLLLLLLLLLLLLLLLLL"); //Needs coding where flowing lava turns to stationary lava
-        map.push("GGGGGGGGGGGGGGGGGGGG"); //if the source / beginning point of the flowing lava line is
-        map.push("LLLLLLLLLLLLLLLLLLLL"); //turned into a platform by the player using a water droplet.
-        map.push("GGGGGGGGGGGGGGGGGGGG");
-        map.push("LLLLLLLLLLLLLLLLLLLL");
-        map.push("GGGGGGGGGGGGGGGGGGGG");
-        map.push("GGGGGGGGGGGGGGGGGGGG");
-        map.push([19, 0]);
-        map.push([]);
-        map.push([[2,9], [2,6], [2, 4]]);
-        player.x = 0 * 16;
-        player.y = 9 * 16;
-        break;
-    case 7: //Level 8 
+    case 6: //Level 7
         map.push("------UUUDDD--U--UGG");
         map.push("------UUUDDD--U--UGG"); //Needs moving platforms on the first 3 U-flowing-lava-lines 
         map.push("------UUUDDD--U--UGG"); //and on the first 3 D-flowing-lava-lines.
@@ -241,7 +224,7 @@ function LoadLevel(level) {
         player.x = 0*16;
         player.y = 9*16;
         break;
-    case 8: //Level 9
+    case 7: //Level 8
         map.push("----GGGG-D----GG----"); //Needs water on the first and the second G of this line.
         map.push("----B----D----GG----");
         map.push("----B----D----GG----");
@@ -261,7 +244,7 @@ function LoadLevel(level) {
         player.x = 4*16;
         player.y = 9*16;
         break;
-    case 9: //Level 10
+    case 8: //Level 9
         map.push("RRRRRRRRD---------GG");
         map.push("GGGGG---D---------GG"); //Needs a water droplet on both G's on this line.
         map.push("GGGGG---D-----------"); //Needs a water droplet on the first G of this line.
@@ -281,7 +264,7 @@ function LoadLevel(level) {
         player.x = 0*16;
         player.y = 9*16;
         break;
-    case 10: //Level 11
+    case 9: //Level 10
         map.push("--D--GGG-G-GGGRRRRRD"); //Needs a moving platform on the D-flowing lava line (starts at [2,0])
         map.push("GGDG---RD-----U----D"); //Needs a water droplet on the first G in this line.
         map.push("--DB---UD-----ULLLLL");
