@@ -230,16 +230,16 @@ function LoadLevel(level) {
         player.y = 9*16;
         break;
     case 7: //Level 8
-        map.push("----GGGG-D----GG----"); //Needs water on the first and the second G of this line.
-        map.push("----B----D----GG----");
-        map.push("----B----D----GG----");
-        map.push("----RRRRDD----GG----"); //Needs a moving platform on the circular flowing lava.
-        map.push("----U---DD----GG----"); //Needs a moving platform on the line of D-flowing lava.
-        map.push("----U---DD----GG----");
-        map.push("----ULLLLD----------");
-        map.push("----GG---D---G------");
-        map.push("----GG---D---BG-----");
-        map.push("----GG---DGGGGG-----"); //Needs a water droplet on the first and fourth G of this line.
+        map.push("----GGGGG-D---GG----"); //Needs water on the first and the second G of this line.
+        map.push("----B-----D---GG----");
+        map.push("----B-----D---GG----");
+        map.push("----RRRRD-D---GG----"); //Needs a moving platform on the circular flowing lava.
+        map.push("----U---D-D---GG----"); //Needs a moving platform on the line of D-flowing lava.
+        map.push("----U---D-D---GG----");
+        map.push("----ULLLL-D---------");
+        map.push("----GG----D--G------");
+        map.push("----GG----D--BG-----");
+        map.push("----GG----D-GGG-----"); //Needs a water droplet on the first and fourth G of this line.
         map.push([15,0]);
         map.push([
         	[4,3,0,-60],
