@@ -5,13 +5,19 @@ var health = 5;
 var stgWidth = 320;
 var stgHeight = 160;
 var map = [];
-var curLevel = 7;
+var curLevel = 0;
 var tiles = [];
 var platformTimers = [];
 var globalTimer = 0;
 
 var taunts = new Howl({
-    urls: ["taunt4.wav"],
+    urls: [
+        "taunt1.wav",
+        "taunt2.wav",
+        "taunt3.wav",
+        "taunt4.wav",
+        "taunt5.wav"
+    ],
     loop: false
 });
 
