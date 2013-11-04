@@ -411,6 +411,7 @@ Tile = Class.create(Sprite, {
             break;
         case 'B':
             if (this.ttl != null && this.ttl > 0) {
+                this.image = game.assets['Breakingactive.png'];
                 if (--this.ttl <= 0) {
                     this.image = game.assets['Lavasmall.png'];
                     this.c = '-';
@@ -586,7 +587,8 @@ window.onload = function() {
         'MovingBlock.png',
         'blackout.png',
         'WaterDrop.png',
-        'WaterSwirl0.png'
+        'WaterSwirl0.png',
+        'Breakingactive.png'
     );
 
     game.onload = function() { //Prepares the game
