@@ -8,6 +8,7 @@ var map = [];
 var curLevel = 0;
 var tiles = [];
 var platformTimers = [];
+var globalTimer = 0;
 
 var bgMusic = new Howl({
   urls: ['bgmusic.mp3'],
@@ -216,14 +217,14 @@ function LoadLevel(level) {
         player.y = 9 * 16;
         break;
     case 7: //Level 8 
-        map.push("------UUUDDD--UGGUGG");
-        map.push("------UUUDDD--UGGUGG"); //Needs moving platforms on the first 3 U-flowing-lava-lines 
-        map.push("------UUUDDD--UGGUGG"); //and on the first 3 D-flowing-lava-lines.
-        map.push("------UUUDDD--UGGUGG");
-        map.push("------UUUDDD--UGGUGG");
-        map.push("------UUUDDDGGUGGUGG"); //Needs water on the first G in this line.
-        map.push("------UUUDDD--UGGUGG"); 
-        map.push("GGGGGGUUUDDD--UGGUGG");
+        map.push("------UUUDDD--U--UGG");
+        map.push("------UUUDDD--U--UGG"); //Needs moving platforms on the first 3 U-flowing-lava-lines 
+        map.push("------UUUDDD--U--UGG"); //and on the first 3 D-flowing-lava-lines.
+        map.push("------UUUDDD--U--UGG");
+        map.push("------UUUDDD--U--UGG");
+        map.push("------UUUDDDGGU--UGG"); //Needs water on the first G in this line.
+        map.push("------UUUDDD--U--UGG"); 
+        map.push("GGGGGGUUUDDD--U--UGG");
         map.push("GGGGGGUUUDDD--UGGUGG");
         map.push("GGGGGGUUUDDDGGUGGUGG"); //Needs water on the fourth to last G in this line.
         map.push([19,0]);
@@ -257,16 +258,16 @@ function LoadLevel(level) {
         player.y = 9*16;
         break;
     case 9: //Level 10
-        map.push("GGGGGGGGGGGGGGGGGGGG");
-        map.push("RRRRRRRRRRRRRRRRRRRR"); //Needs a moving platform on this line.
-        map.push("LLLLLLLLLLLLLLLLLLLL"); //Needs a moving platform on this line.
-        map.push("--------BBBBBBBBBBBB");
-        map.push("--------G-----------");
-        map.push("GG------G-----------"); //Needs a water droplet on the first G of this line.
-        map.push("RRRRRRRRRRRRRRRRRRRR");
-        map.push("GGGG----G-----------"); //Needs a water droplet on the first and fifth G of this line.
-        map.push("GGGG----G-----------"); 
-        map.push("GGGGBGGBBGG---------"); //Needs a water droplet on the 5 and 7th G of this line.
+        map.push("RRRRRRRRD----GGGGGGG");
+        map.push("GG------D----GGGGGGG"); //Needs a water droplet on both G's on this line.
+        map.push("GG------D-----------"); //Needs a water droplet on the first G of this line.
+        map.push("--------D-----------");
+        map.push("--------D-----------");
+        map.push("G------GDGDLLGG-----"); //Needs a water droplet on the first and third G of this line.
+        map.push("BBGG---BD-D-UGG-----");
+        map.push("GGGG---BD-D-U-------"); 
+        map.push("GGGG--GGD-D-U-------"); //Needs a water droplet on the 5th and 6th G on this line.
+        map.push("GGGGBGBBD-RRU-------"); //Needs a water droplet on the 5th G of this line.
         map.push([19,0]);
         map.push([]);
         map.push([]);
@@ -336,6 +337,7 @@ Tile = Class.create(Sprite, {
         this.dx = 0;
         this.dy = 0;
         this.destination = null;
+        this.attachTime = 0;
     },
 
     onenterframe: function() {
@@ -402,6 +404,7 @@ Tile = Class.create(Sprite, {
                     }
                 }
                 if (!found) {
+                    this.attachTime = globalTimer;
                     player.onBlock.push(this);
                 }
             }
@@ -541,32 +544,31 @@ Player = Class.create(Sprite, {
         blackOut.x = this.x - 320;
         blackOut.y = this.y - 160;
 
-        var blockDx = 0;
-        var blockDy = 0;
+        var newest = -1;
+        var newestBlock = null;
         var nextBlocks = [];
         for (var i = 0; i < this.onBlock.length; i++) {
             if (Math.abs(this.onBlock[i].x - this.x) > 16 || Math.abs(this.onBlock[i].y - this.y) > 16) {
                 continue;
             }
+            if (newest < 0 || this.onBlock[i].attachTime > newest) {
+                newest = this.onBlock[i].attachTime;
+                newestBlock = this.onBlock[i];
+            }
             nextBlocks.push(this.onBlock[i]);
-            blockDx += this.onBlock[i].dx;
-            blockDy += this.onBlock[i].dy;
         }
         this.onBlock = nextBlocks;
         
-        if (this.onBlock.length > 0) {
-            blockDx /= this.onBlock.length;
-            blockDy /= this.onBlock.length;
-            this.x += blockDx;
-            this.y += blockDy;
+        if (newestBlock != null) {
+            this.x += newestBlock.dx;
+            this.y += newestBlock.dy;
         }
         
         this.checkBlocks();
 
         if (this.isHolding != null) {
             this.isHolding.image = game.assets['WaterSwirl0.png'];
-            // if (new Date().getTime() % 100 < 90)
-                this.isHolding.rotation += 10;
+            this.isHolding.rotation += 10;
             this.isHolding.x = this.x - 2;
             this.isHolding.y = this.y - 16;
         }
@@ -607,6 +609,8 @@ window.onload = function() {
             for (var i = 0; i < platformTimers.length; i++) {
                 platformTimers[i]();
             }
+
+            globalTimer++;
         });
     }
     game.start(); //Begin the game
