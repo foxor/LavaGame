@@ -5,7 +5,7 @@ var health = 5;
 var stgWidth = 320;
 var stgHeight = 160;
 var map = [];
-var curLevel = 8;
+var curLevel = 0;
 var tiles = [];
 var platformTimers = [];
 var globalTimer = 0;
@@ -94,7 +94,7 @@ function LoadLevel(level) {
     for (var i = 0; i < tiles.length; i++) {
         game.rootScene.removeChild(tiles[i]);
     }
-    if (level >= 1) {
+    if (level >= 10) {
         credits = new Sprite(320, 1000);
         credits.image = game.assets['Credits.png'];
         credits.x = 0;
