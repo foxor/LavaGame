@@ -501,7 +501,7 @@ Player = Class.create(Sprite, {
         }
 
         if (map[10][0] == x && map[10][1] == y) {
-            taunts[Math.floor(Math.random() * 6 - 0.001)].play();
+            taunts[Math.floor(Math.random() * 5 - 0.001)].play();
             LoadLevel(++curLevel);
             return true;
         }
