@@ -5,7 +5,7 @@ var health = 5;
 var stgWidth = 320;
 var stgHeight = 160;
 var map = [];
-var curLevel = 0;
+var curLevel = 9;
 var tiles = [];
 var platformTimers = [];
 var globalTimer = 0;
@@ -248,9 +248,9 @@ function LoadLevel(level) {
         map.push("RRRRRRRRD---------GG");
         map.push("GGGGG---D---------GG"); //Needs a water droplet on both G's on this line.
         map.push("GGGGG---D-----------"); //Needs a water droplet on the first G of this line.
-        map.push("--------D--DRRGGG---");
-        map.push("--------DGGD-UGGG---");
-        map.push("G-------DGGLLUGGG---"); //Needs a water droplet on the first and third G of this line.
+        map.push("--------D--RRDGGG---");
+        map.push("--------DGGU-DGGG---");
+        map.push("G-------DGGULLGGG---"); //Needs a water droplet on the first and third G of this line.
         map.push("BBGG----D-----------");
         map.push("GGGG--GGD-----------"); 
         map.push("GGGG--GGD-----------"); //Needs a water droplet on the 5th and 6th G on this line.
