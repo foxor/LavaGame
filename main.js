@@ -246,7 +246,7 @@ function LoadLevel(level) {
         map.push([15,0]);
         map.push([
         	[4,3,0,-60],
-        	[9,0,60,-60]
+        	[10,0,60,-60]
         	]);
         map.push([[4,0],[5,0],[12,9],[13,9]]);
         player.x = 4*16;
@@ -283,7 +283,7 @@ function LoadLevel(level) {
         map.push("BBGG----D-----------");
         map.push("GGGG--GGD-----------"); 
         map.push("GGGG--GGD-----------"); //Needs a water droplet on the 5th and 6th G on this line.
-        map.push("GGGGBGBBD-----------"); //Needs a water droplet on the 5th G of this line.
+        map.push("GGGGBGBGD-----------"); //Needs a water droplet on the 5th G of this line.
         map.push([19,0]);
         map.push([
           [0,0,60,-60],
