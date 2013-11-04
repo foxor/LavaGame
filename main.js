@@ -273,7 +273,7 @@ function LoadLevel(level) {
         map.push("GGGGBGBBD-RRU-------"); //Needs a water droplet on the 5th G of this line.
         map.push([19,0]);
         map.push([
-          [0,0,60,-60]
+          [0,0,60,-60],
           [11,5,0,-60]
           ]);
         map.push([[0,1],[1,1],[0,2],[0,5],[9,5],[6,8],[7,8],[5,9]]);
