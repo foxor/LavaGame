@@ -8,6 +8,7 @@ var map = [];
 var curLevel = 0;
 var tiles = [];
 var platformTimers = [];
+var globalTimer = 0;
 
 var bgMusic = new Howl({
   urls: ['bgmusic.mp3'],
@@ -336,6 +337,7 @@ Tile = Class.create(Sprite, {
         this.dx = 0;
         this.dy = 0;
         this.destination = null;
+        this.attachTime = 0;
     },
 
     onenterframe: function() {
@@ -402,6 +404,7 @@ Tile = Class.create(Sprite, {
                     }
                 }
                 if (!found) {
+                    this.attachTime = globalTimer;
                     player.onBlock.push(this);
                 }
             }
@@ -535,32 +538,31 @@ Player = Class.create(Sprite, {
         blackOut.x = this.x - 320;
         blackOut.y = this.y - 160;
 
-        var blockDx = 0;
-        var blockDy = 0;
+        var newest = -1;
+        var newestBlock = null;
         var nextBlocks = [];
         for (var i = 0; i < this.onBlock.length; i++) {
             if (Math.abs(this.onBlock[i].x - this.x) > 16 || Math.abs(this.onBlock[i].y - this.y) > 16) {
                 continue;
             }
+            if (newest < 0 || this.onBlock[i].attachTime > newest) {
+                newest = this.onBlock[i].attachTime;
+                newestBlock = this.onBlock[i];
+            }
             nextBlocks.push(this.onBlock[i]);
-            blockDx += this.onBlock[i].dx;
-            blockDy += this.onBlock[i].dy;
         }
         this.onBlock = nextBlocks;
         
-        if (this.onBlock.length > 0) {
-            blockDx /= this.onBlock.length;
-            blockDy /= this.onBlock.length;
-            this.x += blockDx;
-            this.y += blockDy;
+        if (newestBlock != null) {
+            this.x += newestBlock.dx;
+            this.y += newestBlock.dy;
         }
         
         this.checkBlocks();
 
         if (this.isHolding != null) {
             this.isHolding.image = game.assets['WaterSwirl0.png'];
-            // if (new Date().getTime() % 100 < 90)
-                this.isHolding.rotation += 10;
+            this.isHolding.rotation += 10;
             this.isHolding.x = this.x - 2;
             this.isHolding.y = this.y - 16;
         }
@@ -600,6 +602,8 @@ window.onload = function() {
             for (var i = 0; i < platformTimers.length; i++) {
                 platformTimers[i]();
             }
+
+            globalTimer++;
         });
     }
     game.start(); //Begin the game
