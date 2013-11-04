@@ -5,10 +5,15 @@ var health = 5;
 var stgWidth = 320;
 var stgHeight = 160;
 var map = [];
-var curLevel = 9;
+var curLevel = 0;
 var tiles = [];
 var platformTimers = [];
 var globalTimer = 0;
+
+var taunts = new Howl({
+    urls: ["taunt4.wav"],
+    loop: false
+});
 
 var bgMusic = new Howl({
   urls: ['GameMusic.mp3'],
@@ -484,6 +489,7 @@ Player = Class.create(Sprite, {
         }
 
         if (map[10][0] == x && map[10][1] == y) {
+            taunts.play();
             LoadLevel(++curLevel);
             return true;
         }
